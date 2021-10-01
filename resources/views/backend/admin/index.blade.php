@@ -30,7 +30,7 @@
                                 <td>{{ $item->email }}</td>
                                 <td>
                                 @if ($item->avatar) <!-- Kiểm tra hình ảnh tồn tại -->
-                                    <img src="{{asset($item->avatar)}}" width="70" height="70">
+                                    <img src="{{asset($item->avatar)}}" width="50" height="50">
                                     @endif
                                 </td>
                                 <td>

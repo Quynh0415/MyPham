@@ -73,7 +73,7 @@
                                 <!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Lưu</button>
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </div>
                     </form>
                 </div>

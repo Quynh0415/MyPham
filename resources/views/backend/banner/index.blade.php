@@ -50,8 +50,8 @@
 
                             @endforeach
                             </tbody>
-                    </div>
                         </table>
+                    </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->

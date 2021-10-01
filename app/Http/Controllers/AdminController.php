@@ -138,22 +138,22 @@ class AdminController extends Controller
             'name' => 'required|unique:users,name|max:255',
             //kiem tra input có name="name"
 //            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
-            'avatar' => 'required|mimes:jpeg,jpg,png',
+            'avatar' => 'mimes:jpeg,jpg,png',
             //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
 
             'role_id' => 'required|exists:roles,id',
             'is_active' => 'integer|min:0|max:1',
             'email'=>'required|unique:users,email',
-            'password'=>'required',
+//            'password'=>'required',
         ], [
             'name.required' => 'Tên người dùng không được để trống',
             'name.unique' => 'Dữ liệu bị trùng',
             'name.max' => 'Độ dài tối đa 255 kí tự',
             'email.required' => 'Email không được để trống',
             'email.unique' => 'Dữ liệu bị trùng',
-            'avatar.required' => 'Yêu cầu không được để trống',
+//            'avatar.required' => 'Yêu cầu không được để trống',
             'avatar.mimes' => 'Không đúng định dạng ảnh',
-            'password.required'=>'Mật khẩu không được để trống',
+//            'password.required'=>'Mật khẩu không được để trống',
             'role_id.required'=>'Bạn chưa phân quyền',
 
         ]);
@@ -161,6 +161,7 @@ class AdminController extends Controller
         $admin->name = $request->input('name'); // họ tên
         $admin->email = $request->input('email'); // email
         $admin->role_id = $request->input('role_id'); // phần quyền
+
         // kiểm tra xem có nhập mật khẩu mới không ,, nếu có thì mới cập nhật
         if ($request->input('new_password')) {
             $admin->password = bcrypt($request->input('new_password')); // mật khẩu mới
@@ -185,6 +186,7 @@ class AdminController extends Controller
             $is_active = $request->input('is_active');
         }
         $admin->is_active = $is_active;
+
         $admin->save();
 
         // chuyen dieu huong trang
@@ -244,7 +246,6 @@ class AdminController extends Controller
         ];
         //hàm xác thực login của framework : Auth::attemp();
         $checkLogin = Auth::guard('admin')->attempt($dataLogin, $request->has('remember'));
-
         // kiểm tra xem có đăng nhập thành côngh với email và password đã nhập hay không
         if ($checkLogin) {
             return redirect()->route('admin.dashboard');

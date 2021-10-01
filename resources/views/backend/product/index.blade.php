@@ -22,6 +22,7 @@
                                 <th>Danh Mục</th>
                                 <th>Hình ảnh</th>
                                 <th>Trạng thái</th>
+                                <th>Vị trí</th>
                                 <th class="text-center">Tác vụ</th>
                             </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                         @endif
                                     </td>
                                     <td>{{ ($item->is_active == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
+                                    <td>{{ $item->position}}</td>
                                     <td class="text-center">
                                         <a href="{{route('product.edit',['id'=>$item->id])}}"
                                            class="btn btn-info"> <i class="fa fa-pencil-square-o"></i></a>

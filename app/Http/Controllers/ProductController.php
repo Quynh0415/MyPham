@@ -65,6 +65,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
         $product->content = $request->input('content');
+        $product->position = $request->input('position');
         $product->slug = Str::slug($request->input('name'));
         // Upload file
         if ($request->hasFile('image')) { // dòng này Kiểm tra xem có image có được chọn
@@ -152,6 +153,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
         $product->content = $request->input('content');
+        $product->position = $request->input('position');
         $product->slug = Str::slug($request->input('name'));
         // Upload file
         if ($request->hasFile('new_image')) { // dòng này Kiểm tra xem ảnh mới có được chọn
