@@ -66,16 +66,6 @@
                                                                                 class="help-block"> {{$errors->first('categories_id')}} </span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">Vị
-                                                                                    trí</label>
-                                                                                <input type="number"
-                                                                                       class="form-control"
-                                                                                       id="position" name="position"
-                                                                                       value="0">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-6">
                                                                             <div class="checkbox">
                                                                                 <label>
                                                                                     <input type="checkbox" value="1"
@@ -90,10 +80,16 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Mô tả</label>
+                                                            <label>Nội dung</label>
                                                             <textarea id="editor1" name="content" class="form-control"
                                                                       rows="10"
                                                                       placeholder="Enter ...">{{old('content')}}</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Mô tả</label>
+                                                            <textarea id="editor2" name="description" class="form-control"
+                                                                      rows="10"
+                                                                      placeholder="Enter ...">{{old('description')}}</textarea>
                                                         </div>
                                                     </div>
 

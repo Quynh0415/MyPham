@@ -42,18 +42,23 @@ class ProductDetailController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
-            'size' => 'required|unique:products_detail,size',
             'stock' => 'required',
+            'price' => 'required',
+            'sale' => 'required',
         ],[
-            'size.required' => 'Thể tích không được để trống',
-            'stock.required' => 'Số lượng không được để trống'
+            'stock.required' => 'Số lượng không được để trống',
+            'price.required' => 'Đơn giá không được để trống',
+            'sale.required' => 'Giá KM không được để trống',
         ]);
         $product_detail = new ProductDetail();
-        $product_detail->products_id = $request->input('products_id');
+        $product_detail->products_id = $request->input('product_id');
         $product_detail->size = $request->input('size');
         $product_detail->stock = $request->input('stock');
-        $product_detail->description = $request->input('description');
+        $product_detail->price = $request->input('price');
+        $product_detail->sale = $request->input('sale');
+        $product_detail->color = $request->input('color');
         $product_detail->slug = Str::slug($request->input('products_id'));
 
         // Sản phẩm Hot
@@ -72,7 +77,7 @@ class ProductDetailController extends Controller
 
         $product_detail->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.edit', $request->product_id);
 
     }
 
@@ -112,17 +117,21 @@ class ProductDetailController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'size' => 'required|unique:products_detail,size',
             'stock' => 'required',
+            'price' => 'required',
+            'sale' => 'required',
         ],[
-            'size.required' => 'Thể tích không được để trống',
-            'stock.required' => 'Số lượng không được để trống'
+            'stock.required' => 'Số lượng không được để trống',
+            'price.required' => 'Đơn giá không được để trống',
+            'sale.required' => 'Giá KM không được để trống',
         ]);
         $product_detail = ProductDetail::findOrFail($id);
-        $product_detail->products_id = $request->input('products_id');
+        $product_detail->products_id = $request->input('product_id');
         $product_detail->size = $request->input('size');
         $product_detail->stock = $request->input('stock');
-        $product_detail->description = $request->input('description');
+        $product_detail->price = $request->input('price');
+        $product_detail->sale = $request->input('sale');
+        $product_detail->color = $request->input('color');
         $product_detail->slug = Str::slug($request->input('products_id'));
 
         // Sản phẩm Hot

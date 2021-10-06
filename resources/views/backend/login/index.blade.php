@@ -31,6 +31,9 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+    <div>
+        <h1>SHOP MỸ PHẨM</h1>
+    </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
         <form role="form" action="{{route('admin.postLogin')}}" method="post">

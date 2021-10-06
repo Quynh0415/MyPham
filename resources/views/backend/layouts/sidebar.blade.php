@@ -29,7 +29,7 @@
 
             <li class="">
                 <a href="{{route('banner.index')}}">
-                    <i class="fa fa-camera"></i> QL Banner
+                    <i class="fa fa-image"></i> QL Banner
                 </a>
             </li>
             <li class="">
@@ -39,12 +39,12 @@
             </li>
             <li class="">
                 <a href="{{route('article.index')}}">
-                    <i class="fa fa-folder-open"></i> QL Tin Tức
+                    <i class="fa fa-file-text"></i> QL Tin Tức
                 </a>
             </li>
             <li class="">
                 <a href="{{route('product.index')}}">
-                    <i class="fa fa-folder-open"></i> QL Sản Phẩm
+                    <i class="fa  fa-book"></i> QL Sản Phẩm
                 </a>
             </li>
 

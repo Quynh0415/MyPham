@@ -51,18 +51,18 @@
                                                             <input type="number" class="form-control" id="position"
                                                                    name="position" value="0">
                                                         </div>
-                                                       <div class="col-md-6">
-                                                           <label>Danh mục cha</label>
-                                                           <select class="form-control w-50"
-                                                                   name="categories_id">
-                                                               <option value="0">-- Chọn Danh Mục Cha --
-                                                               </option>
-                                                               @foreach($data as $parents_id)
-                                                                   <option
-                                                                       value="{{ $parents_id->id }}">{{ $parents_id->name }}</option>
-                                                               @endforeach
-                                                           </select>
-                                                       </div>
+{{--                                                       <div class="col-md-6">--}}
+{{--                                                           <label>Danh mục cha</label>--}}
+{{--                                                           <select class="form-control w-50"--}}
+{{--                                                                   name="categories_id">--}}
+{{--                                                               <option value="0">-- Chọn Danh Mục Cha ----}}
+{{--                                                               </option>--}}
+{{--                                                               @foreach($data as $parents_id)--}}
+{{--                                                                   <option--}}
+{{--                                                                       value="{{ $parents_id->id }}">{{ $parents_id->name }}</option>--}}
+{{--                                                               @endforeach--}}
+{{--                                                           </select>--}}
+{{--                                                       </div>--}}
 
                                                         <div class="col-md-6">
                                                             <div class="checkbox">
@@ -74,17 +74,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label>Mô tả</label>
-                                                        <textarea id="editor1" name="description" class="form-control"
-                                                                  rows="10"
-                                                                  placeholder="Enter ...">{{old('description')}}</textarea>
-                                                    </div>
                                             </div>
                                             <!-- /.box-body -->
 
                                             <div class="box-footer">
                                                 <button type="submit" class="btn btn-primary">Tạo</button>
+                                                <input type="reset" class="btn btn-default pull-right" value="Reset">
                                             </div>
                                 </div>
                         </div>

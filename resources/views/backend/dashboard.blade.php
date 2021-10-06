@@ -1,7 +1,7 @@
 @extends('backend.layouts.main')
 
 @section('content')
-
+<h1>Thống kê</h1>
 @endsection
 @section('script')
     <script>

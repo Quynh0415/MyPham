@@ -49,18 +49,18 @@
                                                             <input type="number" class="form-control" id="position"
                                                                    name="position" value="{{$category->position}}">
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <label>Danh mục cha</label>
-                                                            <select class="form-control w-50"
-                                                                    name="categories_id">
-                                                                <option value="0">-- Chọn Danh Mục Cha --
-                                                                </option>
+{{--                                                        <div class="col-md-6">--}}
+{{--                                                            <label>Danh mục cha</label>--}}
+{{--                                                            <select class="form-control w-50"--}}
+{{--                                                                    name="categories_id">--}}
+{{--                                                                <option value="0">-- Chọn Danh Mục Cha ----}}
+{{--                                                                </option>--}}
 {{--                                                                @foreach($category as $parents_id)--}}
 {{--                                                                    <option--}}
 {{--                                                                        value="{{ $parents_id->id }}">{{ $parents_id->name }}</option>--}}
 {{--                                                                @endforeach--}}
-                                                            </select>
-                                                        </div>
+{{--                                                            </select>--}}
+{{--                                                        </div>--}}
 
                                                         <div class="col-md-6">
                                                             <div class="checkbox">
@@ -70,13 +70,6 @@
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Mô tả</label>
-                                                        <textarea id="editor1" name="description" class="form-control"
-                                                                  rows="10"
-                                                                  placeholder="Enter ...">{{ $category->description }}</textarea>
                                                     </div>
                                             </div>
                                             <!-- /.box-body -->

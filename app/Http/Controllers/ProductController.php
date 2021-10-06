@@ -65,7 +65,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
         $product->content = $request->input('content');
-        $product->position = $request->input('position');
+        $product->description = $request->input('description');
         $product->slug = Str::slug($request->input('name'));
         // Upload file
         if ($request->hasFile('image')) { // dòng này Kiểm tra xem có image có được chọn
@@ -130,20 +130,20 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:products,name|max:255',
+            'name' => 'required|max:255'.$id,
             //kiem tra input có name="name"
 //            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
-            'new_image' => 'required|mimes:ipeg,jpg,png',
+            'new_image' => 'mimes:ipeg,jpg,png',
             // 'type' => 'required',
-            'categories_id' => 'required|exists:categories,id',
+            'categories_id' => 'exists:categories,id',
             //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
            // 'content' => 'required',
-            'is_active' => 'integer|min:0|max:1',
+//            'is_active' => 'integer|min:0|max:1',
         ], [
             'name.required' => 'Tên sản phẩm không được để trống',
             'name.unique' => 'Dữ liệu bị trùng',
             'name.max' => 'Độ dài tối đa 255 kí tự',
-            'new_image.required' => 'Yêu cầu không được để trống',
+//            'new_image.required' => 'Yêu cầu không được để trống',
             'new_image.mimes' => 'Không đúng định dạng ảnh',
             'categories_id.exists'=>'Bạn chưa chọn danh mục sản phẩm',
             //'content.required' => 'Bạn chưa nhập nội dung',
@@ -153,7 +153,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
         $product->content = $request->input('content');
-        $product->position = $request->input('position');
+        $product->description = $request->input('description');
         $product->slug = Str::slug($request->input('name'));
         // Upload file
         if ($request->hasFile('new_image')) { // dòng này Kiểm tra xem ảnh mới có được chọn
@@ -178,7 +178,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.edit',$id);
     }
 
     /**

@@ -45,8 +45,8 @@ class BannerController extends Controller
             'image' => 'required|mimes:ipeg,jpg,png',
             //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
 
-            'position' => 'required|integer|min:0',
-            'is_active' => 'integer|min:0|max:1',
+           // 'position' => 'required|integer|min:0',
+           // 'is_active' => 'integer|min:0|max:1',
         ], [
             'title.required' => 'Tên danh mục không được để trống',
             'title.unique' => 'Dữ liệu bị trùng',
@@ -131,8 +131,8 @@ class BannerController extends Controller
             'new_image' => 'mimes:ipeg,jpg,png',
             //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
 
-            'position' => 'required|integer|min:0',
-            'is_active' => 'integer|min:0|max:1',
+            //'position' => 'required|integer|min:0',
+           // 'is_active' => 'integer|min:0|max:1',
         ], [
             'title.required' => 'Tên Banner không được để trống',
             'title.unique' => 'Dữ liệu bị trùng',

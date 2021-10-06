@@ -98,9 +98,8 @@
                                                                                 <!-- /.box-body -->
 
                                                                                 <div class="box-footer">
-                                                                                    <button type="submit"
-                                                                                            class="btn btn-primary">Tạo
-                                                                                    </button>
+                                                                                    <button type="submit" class="btn btn-primary">Tạo</button>
+                                                                                    <input type="reset" class="btn btn-default pull-right" value="Reset">
                                                                                 </div>
                                                                     </div>
                                                         </div>
