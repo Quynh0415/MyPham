@@ -3,8 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Thêm mới sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success"><i
-                    class="fa fa-list"></i> Danh Sách SP</a>
+            Thêm mới sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a>
         </h1>
     </section>
 
@@ -13,14 +12,12 @@
             <!-- left column -->
             <div class="col-md-12 col-lg-12">
                 <!-- general form elements -->
-
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Thông tin sản phẩm</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-
                     <form role="form" action="{{route('product.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -33,7 +30,7 @@
                                             <label for="exampleInputEmail1">Tên sản phẩm</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                    value="{{old('name')}}">
-                                            <span class="help-block"> {{$errors->first('name')}} </span>
+                                               <span class="help-block"> {{$errors->first('name')}} </span>
                                         </div>
 
                                         @if($errors ->has('image'))
@@ -47,50 +44,48 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
-                                                            @if($errors ->has('categories_id'))
-                                                                <div class="col-md-6 has-error">
-                                                                    @else
-                                                                        <div class="col-md-6">
-                                                                            @endif
-                                                                            <label>Danh mục sản phẩm</label>
-                                                                            <select class="form-control w-50"
-                                                                                    name="categories_id">
-                                                                                <option value="0">-- chọn Danh Mục --
-                                                                                </option>
-                                                                                @foreach($categories as $category)
-                                                                                    <option
-                                                                                        value="{{ $category->id }}">{{ $category->name }}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                            <span
-                                                                                class="help-block"> {{$errors->first('categories_id')}} </span>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <div class="checkbox">
-                                                                                <label>
-                                                                                    <input type="checkbox" value="1"
-                                                                                           name="is_active"> <b>Trạng
-                                                                                        thái hiển thị</b>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
+                                        @if($errors ->has('categories_id'))
+                                            <div class="col-md-6 has-error">
+                                                @else
+                                                    <div class="col-md-6">
+                                                        @endif
+                                                        <label>Danh mục sản phẩm</label>
+                                                        <select class="form-control w-50"
+                                                                name="categories_id">
+                                                            <option value="0">-- chọn Danh Mục --
+                                                            </option>
+                                                            @foreach($categories as $category)
+                                                                <option
+                                                                    value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span
+                                                            class="help-block"> {{$errors->first('categories_id')}} </span>
+                                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="1"
+                                                           name="is_active"> <b>Trạng
+                                                        thái hiển thị</b>
+                                                </label>
+                                            </div>
+                                        </div>
                                                                 </div>
-
-
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label>Nội dung</label>
-                                                            <textarea id="editor1" name="content" class="form-control"
-                                                                      rows="10"
-                                                                      placeholder="Enter ...">{{old('content')}}</textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Mô tả</label>
-                                                            <textarea id="editor2" name="description" class="form-control"
-                                                                      rows="10"
-                                                                      placeholder="Enter ...">{{old('description')}}</textarea>
-                                                        </div>
+                                        <div class="form-group">
+                                            <label>Nội dung</label>
+                                            <textarea id="editor1" name="content" class="form-control"
+                                                      rows="10"
+                                                      placeholder="Enter ...">{{old('content')}}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mô tả</label>
+                                            <textarea id="editor2" name="description" class="form-control"
+                                                      rows="10"
+                                                      placeholder="Enter ...">{{old('description')}}</textarea>
+                                        </div>
                                                     </div>
 
                                             </div>

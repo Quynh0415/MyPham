@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

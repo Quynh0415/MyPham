@@ -3,8 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Chi tiết sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success"><i
-                    class="fa fa-list"></i> Danh Sách SP</a>
+            Chi tiết sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a>
         </h1>
     </section>
     <!-- Main content -->
@@ -104,7 +103,8 @@
                     <h4>Thêm biến thể sản phẩm</h4>
                 </div>
                 <div class="box-body">
-                    <form role="form" action="{{ route('products_detail.store')}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('products_detail.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <div class="col-md-6">
@@ -113,48 +113,65 @@
                                    value="{{old('size')}}">
                         </div>
                         <div class="col-md-6">
-                            <label for="exampleInputEmail1">Số lượng</label>
-                            <input type="text" class="form-control" id="stock" name="stock"
-                                   value="{{old('stock')}}">
-                        </div>
-                        <div class="col-md-6">
                             <label for="exampleInputEmail1">Màu</label>
                             <input type="text" class="form-control" id="color" name="color"
                                    value="{{old('color')}}">
                         </div>
-                        <div class="col-md-6">
-                            <label for="exampleInputEmail1">Đơn Giá</label>
-                            <input type="text" class="form-control" id="price" name="price"
-                                   value="{{old('price')}}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="exampleInputEmail1">Giá KM</label>
-                            <input type="text" class="form-control" id="sale" name="sale"
-                                   value="{{old('sale')}}">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="1" name="is_hot">
-                                    Sản phẩm hot
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="1" name="prod_new">
-                                    Sản phẩm mới
-                                </label>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Tạo</button>
-                            <input type="reset" class="btn btn-default pull-right" value="Reset">
-                        </div>
+                        @if($errors->has('stock'))
+                            <div class="col-md-6 has-error">
+                                @else
+                                    <div class="col-md-6">
+                                        @endif
+                                        <label for="exampleInputEmail1">Số lượng</label>
+                                        <input type="text" class="form-control" id="stock" name="stock"
+                                               value="{{old('stock')}}">
+                                        <span class="help-block"> {{$errors->first('stock')}} </span>
+                                    </div>
+                                    @if($errors->has('price'))
+                                        <div class="col-md-6 has-error">
+                                            @else
+                                                <div class="col-md-6">
+                                                    @endif
+                                                    <label for="exampleInputEmail1">Đơn Giá</label>
+                                                    <input type="text" class="form-control" id="price" name="price"
+                                                           value="{{old('price')}}">
+                                                    <span class="help-block"> {{$errors->first('price')}} </span>
+                                                </div>
+                                                @if($errors->has('sale'))
+                                                    <div class="col-md-6 has-error">
+                                                        @else
+                                                            <div class="col-md-6">
+                                                                @endif
+                                                                <label for="exampleInputEmail1">Giá KM</label>
+                                                                <input type="text" class="form-control" id="sale"
+                                                                       name="sale"
+                                                                       value="{{old('sale')}}">
+                                                                <span
+                                                                    class="help-block"> {{$errors->first('sale')}} </span>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" value="1" name="is_hot">
+                                                                        Sản phẩm hot
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" value="1"
+                                                                               name="prod_new">
+                                                                        Sản phẩm mới
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-footer">
+                                                                <button type="submit" class="btn btn-primary">Lưu
+                                                                </button>
+                                                            </div>
                     </form>
                 </div>
-
             </div>
         </div>
         <div class="col-md-6">
@@ -179,25 +196,125 @@
 
                         <tbody>
                         <!-- Lặp một mảng dữ liệu pass sang view để hiển thị -->
-{{--                        @foreach($product_detail as $key => $product_detail)--}}
-{{--                            <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->--}}
-{{--                                <td>{{ $key + 1}}</td>--}}
-{{--                                <td>{{ $product_detail->size }}</td>--}}
-{{--                                <td>--}}
-{{--                                    {{ $product_detail->stock }}--}}
-{{--                                </td>--}}
-{{--                                <td>{{ $product_detail->color }}</td>--}}
-{{--                                <td>{{ $product_detail->price }}</td>--}}
-{{--                                <td>{{ ($product_detail->is_hot == 1) ? 'Hiển thị' : 'Ẩn' }}</td>--}}
-{{--                                <td>{{ ($product_detail->prod_new == 1) ? 'Hiển thị' : 'Ẩn' }}</td>--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <a href="{{route('product.edit',['id'=>$item->id])}}"--}}
-{{--                                       class="btn btn-info"> <i class="fa fa-pencil-square-o"></i></a>--}}
-{{--                                    <button onclick="deleteItem('product',{{ $item->id }})" class="btn btn-danger">--}}
-{{--                                        <i class="fa fa-trash-o"></i></button>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
+                        @foreach($product->products_detail as $key => $item)
+                            <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
+                                <td>{{ $key + 1}}</td>
+                                <td>{{ $item->size }}</td>
+                                <td>
+                                    {{ $item->stock }}
+                                </td>
+                                <td>{{ $item->color }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ ($item->is_hot == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
+                                <td>{{ ($item->prod_new == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
+                                <td class="text-center">
+                                    <a data-target="#myModal-{{$key}}" data-toggle="modal"
+{{--                                       href="{{route('products_detail.edit',['id'=>$item->id])}}"--}}
+                                       class="btn btn-primary">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <button onclick="deleteItem('products_detail',{{ $item->id }})"
+                                            class="btn btn-danger">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                </td>
+                                <div class="modal fade" id="myModal-{{$key}}" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                                <h3 class="modal-title">Cập nhật biến thể sản phẩm</h3>
+                                            </div>
+                                            <div class="modal-body" style="text-align: start;">
+                                                <div class="cart cart-order" style="display: flex;">
+                                                    <div class="cart-l" style="padding: 1rem;">
+                                                    </div>
+                                                    <div class="cart-r" style="width: 100%">
+                                                        <form role="form"
+                                                              action="{{ route('products_detail.update', ['id'=>$item->id])}}"
+                                                              method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" name="product_id"
+                                                                   value="{{$product->id}}">
+                                                            <div class="col-md-6">
+                                                                <label for="exampleInputEmail1">Thể tích</label>
+                                                                <input type="text" class="form-control" id="size"
+                                                                       name="size"
+                                                                       value="{{$item->size}}">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="exampleInputEmail1">Màu</label>
+                                                                <input type="text" class="form-control" id="color"
+                                                                       name="color"
+                                                                       value="{{$item->color}}">
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="exampleInputEmail1">Số
+                                                                    lượng</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="stock"
+                                                                       name="stock"
+                                                                       value="{{$item->stock}}">
+
+                                                            </div>
+                                                                <div class="col-md-6">
+                                                                    <label for="exampleInputEmail1">Đơn
+                                                                        Giá</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="price"
+                                                                           name="price"
+                                                                           value="{{$item->price}}">
+                                                                </div>
+                                                            <div class="col-md-6">
+                                                                <label for="exampleInputEmail1">Giá
+                                                                    KM</label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       id="sale"
+                                                                       name="sale"
+                                                                       value="{{$item->sale}}">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input
+                                                                            {{ ($item->is_hot == 1 ) ? 'checked': '' }} type="checkbox"
+                                                                            value="1" name="is_hot">
+                                                                        Sản phẩm hot
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input
+                                                                            {{ ($item->prod_new == 1 ) ? 'checked': '' }} type="checkbox"
+                                                                            value="1" name="prod_new">
+                                                                        Sản phẩm mới
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-footer">
+                                                                <button type="submit"
+                                                                        class="btn btn-primary">Lưu
+                                                                </button>
+                                                                <button type="button" class="btn close pull-right" data-dismiss="modal">Close
+                                                                </button>
+                                                            </div>
+
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
