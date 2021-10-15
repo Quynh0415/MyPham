@@ -131,7 +131,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|max:255'.$id,
+            'name' => 'required|max:255|unique:products,name,'.$id,
             //kiem tra input có name="name"
 //            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
             'new_image' => 'mimes:ipeg,jpg,png',
@@ -163,13 +163,13 @@ class ProductController extends Controller
             // get new_image
             $file = $request->file('new_image');
             // đặt tên cho file new_image
-            $filename = time() . '_' . $file->getClientOriginalName(); // $file->getClientOriginalName() == tên ban đầu của image
+            $filename = time().'_'.$file->getClientOriginalName(); // $file->getClientOriginalName() == tên ban đầu của image
             // Định nghĩa đường dẫn sẽ upload lên
             $path_upload = 'uploads/product/';
             // Thực hiện upload file
             $file->move($path_upload, $filename);
 
-            $product->image = $path_upload . $filename; // gán giá trị ảnh mới cho thuộc tính image của đối tượng
+            $product->image = $path_upload.$filename; // gán giá trị ảnh mới cho thuộc tính image của đối tượng
         }
         $is_active = 0;// mặc định gán không hiển thị
         if ($request->has('is_active')) { // kiem tra is_active co ton tai khong ?

@@ -75,6 +75,7 @@ class ProductDetailController extends Controller
         $product_detail->prod_new=$prod_new;
 
         $product_detail->save();
+
         return redirect()->route('product.edit', $request->product_id);
 
     }

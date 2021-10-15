@@ -25,6 +25,9 @@ Route::resource('category', 'CategoryController');
 Route::resource('article', 'ArticleController');
 Route::resource('product', 'ProductController');
 Route::resource('products_detail', 'ProductDetailController');
+Route::resource('setting', 'SettingController');
+Route::resource('product_image', 'ProductImageController');
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'checkLogin'],function (){
     Route::get('/', 'DashboardController@dashboard')->name('dashboard');

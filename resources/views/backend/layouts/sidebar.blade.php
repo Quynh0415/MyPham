@@ -48,6 +48,11 @@
                 </a>
             </li>
 
+            <li class="">
+                <a href="">
+                    <i class="fa  fa-image"></i> QL Mã Giảm Giá
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

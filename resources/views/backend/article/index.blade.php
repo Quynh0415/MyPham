@@ -24,9 +24,8 @@
                             <thead>
                             <tr>
                                 <td>TT</td>
-                                <th width="15%">Tiêu đề</th>
+                                <th>Tiêu đề</th>
                                 <th>Hình ảnh</th>
-                                <th width="15%">Tóm tắt</th>
                                 <th>Tin tức mới</th>
                                 <th>Vị trí</th>
                                 <th>Trạng thái</th>
@@ -44,13 +43,12 @@
                                         <img src="{{ asset($item->image)}} " width="70" height="70">
                                         @endif
                                     </td>
-                                    <td>{{ $item->content }}</td>
                                     <td>{{ $item->is_hot == 1 ? 'Có' : 'Không' }}</td>
                                     <td>{{ $item->position }}</td>
                                     <td>{{ ($item->is_active == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
                                     <td class="text-center">
-                                        <a href="{{route('article.edit',['id'=>$item->id])}}" class="btn btn-primary">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        <a href="{{route('article.edit',['id'=>$item->id])}}" class="btn btn-info">
+                                            Sửa
                                         </a>
                                         <button onclick="deleteItem('article',{{ $item->id }})" class="btn btn-danger">
                                             <i class="fa fa-trash-o"></i></button>

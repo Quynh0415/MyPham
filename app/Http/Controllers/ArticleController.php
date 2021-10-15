@@ -58,7 +58,7 @@ class ArticleController extends Controller
             'description'=>'required',
         ], [
             'title.required' => 'Tên danh mục không được để trống',
-            'title.unique' => 'Dữ liệu bị trùng',
+            'title.unique'=> 'Dữ liệu bị trùng',
             'title.max' => 'Độ dài tối đa 255 kí tự',
             'image.required' => 'Yêu cầu không được để trống',
             'image.mimes' => 'Không đúng định dạng ảnh',
@@ -144,7 +144,7 @@ class ArticleController extends Controller
     {
 
         $request->validate([
-            'title' => 'required|unique:articles,title|max:255',
+            'title' => 'required|max:255|unique:articles,title,'.$id,
             //kiem tra input có name="name"
             'categories_id' => 'required|exists:categories,id',
 

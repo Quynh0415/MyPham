@@ -135,7 +135,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:users,name|max:255',
+            'name' => 'required||max:255|unique:users,name,'.$id,
             //kiem tra input có name="name"
 //            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
             'avatar' => 'mimes:jpeg,jpg,png',

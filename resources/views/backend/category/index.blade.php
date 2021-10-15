@@ -45,7 +45,7 @@
                                     <td>{{($item->is_active == 1 ) ? 'Hiển Thị' : 'Ẩn'}}</td>
 
                                     <td class="text-center">
-                                        <a href="{{route('category.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="{{route('category.edit', ['id'=> $item->id])}}" class="btn btn-info">Sửa</a>
                                         <button onclick="deleteItem('category',{{ $item->id }})" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                 </tr>

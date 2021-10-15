@@ -13,6 +13,7 @@
                 <div class="box-header with-border">
                     <h4>Thông tin sản phẩm</h4>
                 </div>
+
                 <div class="box-body">
                     <form role="form" action="{{ route('product.update',['id'=>$product->id])}}" method="post"
                           enctype="multipart/form-data">
