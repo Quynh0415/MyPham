@@ -17,7 +17,9 @@ class ProductDetailController extends Controller
     public function index()
     {
         $product = Product::all();
-        return view('backend.product.edit',['product' => $product]);
+        return view('backend.product.edit',[
+            'product' => $product,
+            ]);
     }
 
     /**

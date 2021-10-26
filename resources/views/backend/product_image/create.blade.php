@@ -40,23 +40,23 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- Lặp một mảng dữ liệu pass sang view để hiển thị -->
-{{--                            @foreach($product->products_image as $key => $item)--}}
-{{--                                <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->--}}
-{{--                                    <td>{{ $key + 1}}</td>--}}
-{{--                                    <td>--}}
-{{--                                    @if ($item->image) <!-- Kiểm tra hình ảnh tồn tại -->--}}
-{{--                                        <img src="{{asset($item->image)}}" width="50" height="50">--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
-{{--                                    <td class="text-center">--}}
-{{--                                        <button onclick="deleteItem('product_image',{{ $item->id }})"--}}
-{{--                                                class="btn btn-danger">--}}
-{{--                                            <i class="fa fa-trash-o"></i>--}}
-{{--                                        </button>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
+{{--                            <!-- Lặp một mảng dữ liệu pass sang view để hiển thị -->--}}
+                            @foreach($product->products_image as $key => $item)
+                                <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
+                                    <td>{{ $item + 1}}</td>
+                                    <td>
+                                    @if ($item->image) <!-- Kiểm tra hình ảnh tồn tại -->
+                                        <img src="{{asset($item->image)}}" width="50" height="50">
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <button onclick="deleteItem('product_image',{{ $item->id }})"
+                                                class="btn btn-danger">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

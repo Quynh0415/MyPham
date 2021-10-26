@@ -27,6 +27,7 @@ Route::resource('product', 'ProductController');
 Route::resource('products_detail', 'ProductDetailController');
 Route::resource('setting', 'SettingController');
 Route::resource('product_image', 'ProductImageController');
+Route::resource('coupon', 'CouponController');
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'checkLogin'],function (){

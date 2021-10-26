@@ -49,7 +49,7 @@
             </li>
 
             <li class="">
-                <a href="">
+                <a href="{{route('coupon.index')}}">
                     <i class="fa  fa-image"></i> QL Mã Giảm Giá
                 </a>
             </li>

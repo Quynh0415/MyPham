@@ -51,19 +51,15 @@
                                                             <input type="number" class="form-control" id="position"
                                                                    name="position" value="0">
                                                         </div>
-{{--                                                       <div class="col-md-6">--}}
-{{--                                                           <label>Danh mục cha</label>--}}
-{{--                                                           <select class="form-control w-50"--}}
-{{--                                                                   name="categories_id">--}}
-{{--                                                               <option value="0">-- Chọn Danh Mục Cha ----}}
-{{--                                                               </option>--}}
-{{--                                                               @foreach($data as $parents_id)--}}
-{{--                                                                   <option--}}
-{{--                                                                       value="{{ $parents_id->id }}">{{ $parents_id->name }}</option>--}}
-{{--                                                               @endforeach--}}
-{{--                                                           </select>--}}
-{{--                                                       </div>--}}
-
+                                                        <div class="col-md-6">
+                                                            <label for="categoryOption">Danh mục cha</label>
+                                                            <select name="parents_id" id="parents_id" class="form-control">
+                                                                <option value="0">--- Chọn ---</option>
+                                                                @foreach($data as $item)
+                                                                    <option value="{{$item -> id}}">{{$item -> name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                         <div class="col-md-6">
                                                             <div class="checkbox">
                                                                 <label>

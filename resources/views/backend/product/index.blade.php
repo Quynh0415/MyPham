@@ -43,9 +43,9 @@
                                     <td>{{ ($item->is_active == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
                                     <td class="text-center">
                                         <a href="{{route('product_image.create',['id'=>$item->id])}}"
-                                           class="btn btn-info btn-warning"> <i class="fa fa-pencil-square-o"></i></a>
+                                           class="btn btn-info btn-warning">+</a>
                                         <a href="{{route('product.edit',['id'=>$item->id])}}"
-                                           class="btn btn-info">Sửa</a>
+                                           class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <button onclick="deleteItem('product',{{ $item->id }})" class="btn btn-danger">
                                             <i class="fa fa-trash-o"></i></button>
                                     </td>

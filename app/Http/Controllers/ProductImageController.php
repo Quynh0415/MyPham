@@ -16,7 +16,9 @@ class ProductImageController extends Controller
     public function index()
     {
         $product = Product::all();
-        return view('backend.product_image.create',['product' => $product]);
+        return view('backend.product_image.create',[
+            'product' => $product,
+            ]);
     }
 
     /**

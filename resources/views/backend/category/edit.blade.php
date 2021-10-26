@@ -20,7 +20,7 @@
                         <h3 class="box-title">Thông tin danh mục</h3>
                     </div>
 
-                    <form role="form" action="{{ route('category.update',['id'=>$category->id])}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('category.update',['id'=>$cates->id])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="box-body">
@@ -31,15 +31,15 @@
                                         <div class="form-group">
                                             @endif
                                             <label for="exampleInputEmail1">Tên danh mục</label>
-                                            <input value="{{$category->name}}" type="text" class="form-control" id="title" name="name" placeholder="Nhập tên danh mục">
+                                            <input value="{{$cates->name}}" type="text" class="form-control" id="title" name="name" placeholder="Nhập tên danh mục">
                                             <span class="help-block"> {{$errors->first('name')}} </span>
                                         </div>
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Change File</label>
                                                     <input type="file" id="new_image" name="new_image"><br>
-                                                    @if ($category->image)
-                                                        <img src="{{asset($category->image)}}" width="200">
+                                                    @if ($cates->image)
+                                                        <img src="{{asset($cates->image)}}" width="200">
                                                     @endif
                                                 </div>
 
@@ -47,25 +47,22 @@
                                                         <div class="col-md-6">
                                                             <label for="exampleInputEmail1">Vị trí</label>
                                                             <input type="number" class="form-control" id="position"
-                                                                   name="position" value="{{$category->position}}">
+                                                                   name="position" value="{{$cates->position}}">
                                                         </div>
-{{--                                                        <div class="col-md-6">--}}
-{{--                                                            <label>Danh mục cha</label>--}}
-{{--                                                            <select class="form-control w-50"--}}
-{{--                                                                    name="categories_id">--}}
-{{--                                                                <option value="0">-- Chọn Danh Mục Cha ----}}
-{{--                                                                </option>--}}
-{{--                                                                @foreach($category as $parents_id)--}}
-{{--                                                                    <option--}}
-{{--                                                                        value="{{ $parents_id->id }}">{{ $parents_id->name }}</option>--}}
-{{--                                                                @endforeach--}}
-{{--                                                            </select>--}}
-{{--                                                        </div>--}}
+                                                        <div class="col-md-6">
+                                                            <label for="categoryOption">Danh mục cha</label>
+                                                            <select name="parents_id" id="parents_id" class="form-control">
+                                                                <option value="0">--- Chọn ---</option>
+                                                                @foreach($category as $item)
+                                                                    <option {{($cates->parents_id == $item->id) ? 'selected' : ''}} value="{{$item->id}}">{{$item -> name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
                                                         <div class="col-md-6">
                                                             <div class="checkbox">
                                                                 <label>
-                                                                    <input {{ ($category->is_active == 1) ? 'checked':'' }} type="checkbox" value="1" name="is_active">
+                                                                    <input {{ ($cates->is_active == 1) ? 'checked':'' }} type="checkbox" value="1" name="is_active">
                                                                     Trạng thái hiển thị
                                                                 </label>
                                                             </div>

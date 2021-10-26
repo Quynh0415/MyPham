@@ -52,9 +52,9 @@
                                     </td>
                                     <td>{{ ($item->is_active == 1) ? 'Kích hoạt' : 'Chưa kích hoạt' }}</td>
                                     <td class="text-center">
-                                        <a href="{{route('admins.edit', ['id'=> $item->id])}}" class="btn btn-info">Sửa</a>
+                                        <a href="{{route('admins.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <!-- Thêm sự kiện onlick cho nút xóa -->
-                                        <a href="javascript:void(0)" class="btn btn-danger" onclick="deleteItem('admin',{{ $item->id }})" >Xóa</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger" onclick="deleteItem('admin',{{ $item->id }})" ><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

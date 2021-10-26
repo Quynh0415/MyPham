@@ -27,8 +27,11 @@ class CategoryController extends Controller
     public function create()
     {
         $category = Category::all();
-
-        return view('backend.category.create', ['data' => $category]);
+        $pos = Category::max('position');
+        return view('backend.category.create', [
+            'data' => $category,
+            'pos' => $pos,
+            ]);
     }
 
     /**
@@ -53,7 +56,7 @@ class CategoryController extends Controller
             'name.unique' => 'Dữ liệu bị trùng',
             'name.max' => 'Độ dài tối đa 255 kí tự',
             'image.required' => 'Yêu cầu không được để trống',
-            'image.mimes' => 'Không đúng định dạng ảnh',
+            'image.mimes    ' => 'Không đúng định dạng ảnh',
 //
         ]);
 
@@ -110,9 +113,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findorFail($id);
+        $category = Category::all();
+        $cates = Category::findorFail($id);
         return view('backend.category.edit',[
-            'category'=>$category
+            'category'=> $category,
+            'cates' => $cates,
         ]);
     }
 

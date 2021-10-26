@@ -48,7 +48,7 @@
                                     <td>{{ ($item->is_active == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
                                     <td class="text-center">
                                         <a href="{{route('article.edit',['id'=>$item->id])}}" class="btn btn-info">
-                                            Sửa
+                                            <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <button onclick="deleteItem('article',{{ $item->id }})" class="btn btn-danger">
                                             <i class="fa fa-trash-o"></i></button>
