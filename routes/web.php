@@ -26,7 +26,8 @@ Route::resource('article', 'ArticleController');
 Route::resource('product', 'ProductController');
 Route::resource('products_detail', 'ProductDetailController');
 Route::resource('setting', 'SettingController');
-Route::resource('product_image', 'ProductImageController');
+Route::get('/product_image/create/{id}', 'ProductImageController@create')->name('product_image.create');
+Route::resource('product_image', 'ProductImageController')->except(['create']);
 Route::resource('coupon', 'CouponController');
 
 

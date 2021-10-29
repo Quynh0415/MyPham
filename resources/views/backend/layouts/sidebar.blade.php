@@ -53,6 +53,12 @@
                     <i class="fa  fa-image"></i> QL Mã Giảm Giá
                 </a>
             </li>
+
+            <li class="">
+                <a href="{{route('setting.index')}}">
+                    <i class="fa  fa-image"></i> Cấu hình website
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

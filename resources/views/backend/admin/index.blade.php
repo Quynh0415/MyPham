@@ -50,7 +50,13 @@
                                             <p>Other<p>
                                         @endif
                                     </td>
-                                    <td>{{ ($item->is_active == 1) ? 'Kích hoạt' : 'Chưa kích hoạt' }}</td>
+                                    <td>
+                                        @if($item->is_active == 1)
+                                            <span class="label label-success">Kích hoạt</span>
+                                        @else
+                                            <span class="label label-default">Chưa kích hoạt</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{route('admins.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <!-- Thêm sự kiện onlick cho nút xóa -->

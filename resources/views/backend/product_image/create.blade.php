@@ -12,6 +12,7 @@
                     </div>
                     <form role="form" action="{{route('product_image.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="id" value="{{$product->id}}">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputFile">Ảnh sản phẩm</label>
@@ -43,7 +44,7 @@
 {{--                            <!-- Lặp một mảng dữ liệu pass sang view để hiển thị -->--}}
                             @foreach($product->products_image as $key => $item)
                                 <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
-                                    <td>{{ $item + 1}}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>
                                     @if ($item->image) <!-- Kiểm tra hình ảnh tồn tại -->
                                         <img src="{{asset($item->image)}}" width="50" height="50">

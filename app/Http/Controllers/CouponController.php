@@ -51,7 +51,7 @@ class CouponController extends Controller
         $coupon->value = $request->input('value');
         $coupon->date_end = $request->input('date_end');
         $coupon->quantity = $request->input('quantity');
-       // $coupon->condition = $request->input('condition');
+        $coupon->condition = $request->input('condition');
 
         if ($request->has('is_active')) { // kiem tra is_active co ton tai khong ?
             $is_active = $request->input('is_active');
@@ -103,7 +103,7 @@ class CouponController extends Controller
         $coupon->value = $request->input('value');
         $coupon->date_end = $request->input('date_end');
         $coupon->quantity = $request->input('quantity');
-       // $coupon->condition = $request->input('condition');
+        $coupon->condition = $request->input('condition');
 
         if ($request->has('is_active')) { // kiem tra is_active co ton tai khong ?
             $is_active = $request->input('is_active');

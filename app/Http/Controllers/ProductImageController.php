@@ -26,9 +26,9 @@ class ProductImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $product = Product::all();
+        $product = Product::findOrFail($id);
 
         return view('backend.product_image.create', [
             'product' => $product,
@@ -44,7 +44,7 @@ class ProductImageController extends Controller
     public function store(Request $request)
     {
         $product_image = new ProductImage();
-        $product_image->products_id = $request->input('product_id');
+        $product_image->products_id = $request->input('id');
 
         // Upload file
         if ($request->hasFile('image')) { // dòng này Kiểm tra xem có image có được chọn
@@ -61,7 +61,7 @@ class ProductImageController extends Controller
         }
          $product_image->save();
 
-        return redirect()->route('product_image.create', $request->product_id);
+        return back();
     }
 
     /**

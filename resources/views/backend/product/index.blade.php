@@ -40,7 +40,12 @@
                                         <img src="{{asset($item->image)}}" width="50" height="50">
                                         @endif
                                     </td>
-                                    <td>{{ ($item->is_active == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
+                                    <td>
+                                        @if($item->is_active == 1)
+                                            <span class="label label-success">Hiển thị</span>
+                                        @else
+                                            <span class="label label-default">Không hiển thị</span>
+                                        @endif</td>
                                     <td class="text-center">
                                         <a href="{{route('product_image.create',['id'=>$item->id])}}"
                                            class="btn btn-info btn-warning">+</a>

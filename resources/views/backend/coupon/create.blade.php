@@ -41,6 +41,10 @@
                                     <input type="date" class="form-control" value="" id="date_end" name="date_end">
                             </div>
                             <div class="col-md-6">
+                                <label for="exampleInputEmail1">Số tiền tối thiểu:</label>
+                                <input value="{{old('condition')}}" type="text" class="form-control" id="condition" name="condition">
+                            </div>
+                            <div class="col-md-6">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" value="1" name="is_active">

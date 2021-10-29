@@ -34,7 +34,12 @@
                                     <td>{{$item->code}}</td>
                                     <td>{{$item->value}}</td>
                                     <td>{{$item->date_end}}</td>
-                                    <td>{{($item->is_active == 1 ) ? 'Hiển Thị' : 'Ẩn'}}</td>
+                                    <td>
+                                        @if($item->is_active == 1)
+                                            <span class="label label-success">Hiển thị</span>
+                                        @else
+                                            <span class="label label-default">Không hiển thị</span>
+                                        @endif</td>
                                     <td class="text-center">
                                         <a href="{{route('coupon.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <button onclick="deleteItem('coupon',{{ $item->id }})" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>

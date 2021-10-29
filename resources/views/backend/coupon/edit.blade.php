@@ -42,6 +42,10 @@
                                 <input type="date" class="form-control" value="{{$coupon->date_end}}" id="date_end" name="date_end">
                             </div>
                             <div class="col-md-6">
+                                <label for="exampleInputEmail1">Số tiền tối thiểu:</label>
+                                <input value="{{$coupon->condition}}" type="text" class="form-control" id="condition" name="condition">
+                            </div>
+                            <div class="col-md-6">
                                 <div class="checkbox">
                                     <label>
                                         <input {{ ($coupon->is_active == 1) ? 'checked':'' }} type="checkbox" value="1" name="is_active">
