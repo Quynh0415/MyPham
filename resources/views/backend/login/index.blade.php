@@ -31,13 +31,18 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-    <div>
-        <h1>SHOP MỸ PHẨM</h1>
+    <div class="login-logo">
+        <h1 style="color: black"><b>Admin</b>Beauty Mona</h1>
     </div>
+
+
     <!-- /.login-logo -->
     <div class="login-box-body">
         <form role="form" action="{{route('admin.postLogin')}}" method="post">
             @csrf
+           <div>
+                <h2 class="login-box-msg" style="color:blue; font-size: 30px">Đăng nhập</h2>
+           </div>
             <div class="form-group has-feedback">
                 <input name="email" type="text" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

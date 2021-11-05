@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>Ảnh chi tiết sản phẩm</h1>
+        <h1>Ảnh chi tiết sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a></h1>
     </section>
         <div class="row">
             <div class="col-md-6">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Category;
 use App\Product;
 use App\ProductDetail;
@@ -29,9 +30,11 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $categories = Category::all();
+        $brands = Brand::all();
 
         return view('backend.product.create' ,[
             'categories' => $categories,
+            'brands' => $brands,
         ]);
     }
 
@@ -49,6 +52,7 @@ class ProductController extends Controller
 //            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
             'image' => 'required|mimes:ipeg,jpg,png',
             'categories_id' => 'required|exists:categories,id',
+            'brands_id' => 'required|exists:brands,id',
             //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
            // 'content' => 'required',
             'is_active' => 'integer|min:0|max:1',
@@ -59,6 +63,7 @@ class ProductController extends Controller
             'image.required' => 'Yêu cầu không được để trống',
             'image.mimes' => 'Không đúng định dạng ảnh',
             'categories_id.exists'=>'Bạn chưa chọn danh mục sản phẩm',
+            'brands_id.exists'=>'Bạn chưa chọn thương hiệu sản phẩm',
            // 'content.required' => 'Bạn chưa nhập nội dung',
         ]);
 
@@ -114,10 +119,12 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $categories = Category::all();
+        $brands = Brand::all();
 
         return view('backend.product.edit', [
             'product' => $product,
             'categories' => $categories,
+            'brands' => $brands,
         ]);
     }
 
@@ -137,6 +144,7 @@ class ProductController extends Controller
             'new_image' => 'mimes:ipeg,jpg,png',
             // 'type' => 'required',
             'categories_id' => 'exists:categories,id',
+            'brands_id' => 'exists:brands,id',
             //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
            // 'content' => 'required',
 //            'is_active' => 'integer|min:0|max:1',
@@ -147,12 +155,14 @@ class ProductController extends Controller
 //            'new_image.required' => 'Yêu cầu không được để trống',
             'new_image.mimes' => 'Không đúng định dạng ảnh',
             'categories_id.exists'=>'Bạn chưa chọn danh mục sản phẩm',
+            'brands_id.exists'=>'Bạn chưa chọn thương hiệu sản phẩm',
             //'content.required' => 'Bạn chưa nhập nội dung',
         ]);
 
         $product = Product::findOrFail($id);
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
+        $product->brands_id = $request->input('brands_id');
         $product->content = $request->input('content');
         $product->description = $request->input('description');
         $product->slug = Str::slug($request->input('name'));

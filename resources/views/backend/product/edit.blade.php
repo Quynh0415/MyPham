@@ -39,6 +39,7 @@
                                                     <img src="{{asset($product->image)}}" width="200">
                                                     <span class="help-block"> {{$errors->first('image')}} </span>
                                                 </div>
+
                                                 @if($errors->has('categories_id'))
                                                     <div class="form-group has-error">
                                                         @else
@@ -58,6 +59,20 @@
                                                                             class="help-block"> {{$errors->first('categories_id')}} </span>
                                                                     </select>
                                                                 </div>
+                                                @if($errors->has('brands_id'))
+                                                <div class="col-md-6 has-error">
+                                                    @else
+                                                    <div class="col-md-6">
+                                                        @endif
+                                                    <label>Thương hiệu</label>
+                                                    <select class="form-control w-50" name="brands_id">
+                                                        <option value="0">--Chọn Thương Hiệu--</option>
+                                                        @foreach($brands as $brand)
+                                                            <option value="{{$brand->id}}" {{($brand->id == $product->brands_id) ? 'selected' : ''}}>{{$brand->name}}</option>
+                                                        <span class="help-block">{{$errors->first('brands_id')}}</span>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                                                 <div class="col-md-6">
                                                                     <div class="checkbox">
                                                                         <label>

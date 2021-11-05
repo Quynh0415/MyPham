@@ -22,6 +22,7 @@ Route::get('/admin/logout', 'AdminController@logout')->name('admin.logout');
 Route::resource('/admins','AdminController')->except(['login']);
 Route::resource('banner', 'BannerController');
 Route::resource('category', 'CategoryController');
+Route::resource('brand', 'BrandController');
 Route::resource('article', 'ArticleController');
 Route::resource('product', 'ProductController');
 Route::resource('products_detail', 'ProductDetailController');

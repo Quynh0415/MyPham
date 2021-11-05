@@ -62,6 +62,24 @@
                                                         <span
                                                             class="help-block"> {{$errors->first('categories_id')}} </span>
                                                     </div>
+                                        @if($errors ->has('brands_id'))
+                                            <div class="col-md-6 has-error">
+                                                @else
+                                                    <div class="col-md-6">
+                                                        @endif
+                                                        <label>Thương hiệu</label>
+                                                        <select class="form-control w-50"
+                                                                name="brands_id">
+                                                            <option value="0">-- Chọn thương hiệu --
+                                                            </option>
+                                                            @foreach($brands as $brand)
+                                                                <option
+                                                                    value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <span
+                                                            class="help-block"> {{$errors->first('brands_id')}} </span>
+                                                    </div>
                                         <div class="col-md-6">
                                             <div class="checkbox">
                                                 <label>
