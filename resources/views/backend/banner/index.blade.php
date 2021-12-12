@@ -1,12 +1,16 @@
 @extends('backend.layouts.main')
 
 @section('content')
+{{--    <div class="alert alert-warning alert-dismissible" role="alert">--}}
+{{--        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
+{{--        <strong>Thông báo!</strong> Better check yourself, you're not looking too good.--}}
+{{--    </div>--}}
     <section class="content-header">
         <h1>
-            Danh Sách Banner <a href="{{ route('banner.create') }}" type="button" class="btn bg-olive btn-flat margin">Thêm Banner</a>
+            Danh Sách Banner <a href="{{ route('admin.banner.create') }}" type="button" class="btn bg-olive btn-flat margin">Thêm Banner</a>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
             <li><a href="#">Tables</a></li>
             <li class="active">Data tables</li>
         </ol>
@@ -41,12 +45,19 @@
                                     <td>{{ $item->position }}</td>
                                     <td>
                                         @if($item->is_active == 1)
-                                            <span class="label label-success">Hiển thị</span>
+                                           <button class="btn btn-success" dataTarget="{{ $item->id }}"
+                                           onclick="changeStatus(this)" dataValue="0">
+                                           Hiện
+                                           </button>
                                         @else
-                                            <span class="label label-default">Không hiển thị</span>
-                                        @endif</td>
+                                            <button class="btn btn-success" dataTarget="{{ $item->id }}"
+                                                    onclick="changeStatus(this)" dataValue="1">
+                                                Ẩn
+                                            </button>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
-                                        <a href="{{route('banner.edit',['id'=>$item->id])}}" class="btn btn-info">
+                                        <a href="{{route('admin.banner.edit',['id'=>$item->id])}}" class="btn btn-info">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <button onclick="deleteItem('banner',{{ $item->id }})" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
@@ -80,5 +91,31 @@
                 'autoWidth'   : false
             })
         })
+        function  changeStatus(button) {
+            $.ajax({
+                url: "{{ route('admin.admin.banner.stt') }}",
+                method: 'post',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: button.attributes.dataTarget.value,
+                    is_active: button.attributes.dataValue.value
+                },
+                success: function (result) {
+                    console.log(button)
+                    if (result.is_active == 0) {
+                        button.attributes.dataValue.value = 1;
+                        button.innerText = "Ẩn";
+                        button.classList.toggle('btn-success');
+                    }else {
+                        button.attributes.dataValue.value = 0;
+                        button.innerText = "Hiện";
+                        button.classList.toggle('btn-success');
+                    }
+                },
+                error: function (error) {
+                    alert('Lỗi: ' + error);
+                }
+            })
+        }
     </script>
 @endsection

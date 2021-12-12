@@ -60,8 +60,8 @@
                                     <td class="text-center">
                                         <a href="{{route('admins.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <!-- Thêm sự kiện onlick cho nút xóa -->
-                                        <a href="javascript:void(0)" class="btn btn-danger" onclick="deleteItem('admin',{{ $item->id }})" ><i class="fa fa-trash-o"></i></a>
-                                    </td>
+                                        <button onclick="deleteItem('admin',{{ $item->id }})" class="btn btn-danger">
+                                            <i class="fa fa-trash-o"></i></button>                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

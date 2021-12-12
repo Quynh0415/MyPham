@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Thêm Admin <a href="{{route('admins.index')}}" class="btn btn-success">Danh Sách</a>
+            Thêm Admin <a href="{{route('admin.admin.index')}}" class="btn btn-success">Danh Sách</a>
         </h1>
     </section>
 
@@ -19,7 +19,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="{{route('admins.store')}}" method="post"
+                    <form role="form" action="{{route('admin.admin.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">

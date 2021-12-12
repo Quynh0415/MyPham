@@ -87,7 +87,7 @@ class BannerController extends Controller
 
         $banner->save();
 
-        return redirect()->route('banner.index');
+        return redirect()->route('admin.banner.index');
 
     }
 
@@ -175,7 +175,7 @@ class BannerController extends Controller
         $banner->save();
 
         // Chuyển hướng trang về trang danh sách
-        return redirect()->route('banner.index');
+        return redirect()->route('admin.banner.index');
     }
 
     /**
@@ -200,5 +200,17 @@ class BannerController extends Controller
 
         // Trả về dữ liệu json và trạng thái kèm theo thành công là 200
         return response()->json(['isSuccess' => $isSuccess], $statusCode);
+    }
+
+    public function  changeStatus(Request $request) {
+        $banner = Banner::findOrFail($request->id);
+        if($banner) {
+            $banner->is_active = $request->is_active;
+            $banner->save();
+
+            return response()->json($banner);
+        }else {
+            return response('Có lỗi xảy ra', 404);
+        }
     }
 }

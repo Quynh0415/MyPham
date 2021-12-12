@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Danh sách sản phẩm <a href="{{route('product.create')}}" type="button"
+            Danh sách sản phẩm <a href="{{route('admin.product.create')}}" type="button"
                                   class="btn bg-olive btn-flat margin">Thêm sản phẩm</a>
         </h1>
     </section>
@@ -42,14 +42,21 @@
                                     </td>
                                     <td>
                                         @if($item->is_active == 1)
-                                            <span class="label label-success">Hiển thị</span>
+                                            <button class="btn btn-success" dataTarget="{{ $item->id }}"
+                                                    onclick="changeStatus(this)" dataValue="0">
+                                                Hiện
+                                            </button>
                                         @else
-                                            <span class="label label-default">Không hiển thị</span>
-                                        @endif</td>
+                                            <button class="btn btn-success" dataTarget="{{ $item->id }}"
+                                                    onclick="changeStatus(this)" dataValue="1">
+                                                Ẩn
+                                            </button>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
-                                        <a href="{{route('product_image.create',['id'=>$item->id])}}"
+                                        <a href="{{route('admin.admin.product_image.create',['id'=>$item->id])}}"
                                            class="btn btn-info btn-warning">+</a>
-                                        <a href="{{route('product.edit',['id'=>$item->id])}}"
+                                        <a href="{{route('admin.product.edit',['id'=>$item->id])}}"
                                            class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <button onclick="deleteItem('product',{{ $item->id }})" class="btn btn-danger">
                                             <i class="fa fa-trash-o"></i></button>
@@ -81,5 +88,31 @@
                 'autoWidth': false
             })
         })
+        function  changeStatus(button) {
+            $.ajax({
+                url: "{{ route('admin.admin.product.stt') }}",
+                method: 'post',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: button.attributes.dataTarget.value,
+                    is_active: button.attributes.dataValue.value
+                },
+                success: function (result) {
+                    console.log(button)
+                    if (result.is_active == 0) {
+                        button.attributes.dataValue.value = 1;
+                        button.innerText = "Ẩn";
+                        button.classList.toggle('btn-success');
+                    }else {
+                        button.attributes.dataValue.value = 0;
+                        button.innerText = "Hiện";
+                        button.classList.toggle('btn-success');
+                    }
+                },
+                error: function (error) {
+                    alert('Lỗi: ' + error);
+                }
+            })
+        }
     </script>
 @endsection

@@ -98,7 +98,7 @@ class SettingController extends Controller
         $setting->save();
 
         // chuyen dieu huong trang
-        return redirect()->route('setting.index');
+        return redirect()->route('admin.setting.index');
     }
 
     /**

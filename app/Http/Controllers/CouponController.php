@@ -60,7 +60,7 @@ class CouponController extends Controller
 
         $coupon->save();
 
-        return redirect()->route('coupon.index');
+        return redirect()->route('admin.coupon.index');
     }
 
     /**
@@ -112,7 +112,7 @@ class CouponController extends Controller
 
         $coupon->save();
 
-        return redirect()->route('coupon.index');
+        return redirect()->route('admin.coupon.index');
     }
 
     /**

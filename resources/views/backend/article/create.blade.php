@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Thêm Mới Tin Tức<a href="{{ route('article.index') }}" type="button"
+            Thêm Mới Tin Tức<a href="{{ route('admin.article.index') }}" type="button"
                                class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
@@ -17,7 +17,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Thông tin Tin Tức</h3>
                     </div>
-                    <form role="form" action="{{ route('article.store') }}" method="post"
+                    <form role="form" action="{{ route('admin.article.store') }}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">

@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Danh Sách Mã Giảm Giá <a href="{{route('coupon.create')}}" class="btn bg-olive btn-flat margin">Thêm Mã Giảm Giá</a>
+            Danh Sách Mã Giảm Giá <a href="{{route('admin.coupon.create')}}" class="btn bg-olive btn-flat margin">Thêm Mã Giảm Giá</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -41,7 +41,7 @@
                                             <span class="label label-default">Không hiển thị</span>
                                         @endif</td>
                                     <td class="text-center">
-                                        <a href="{{route('coupon.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="{{route('admin.coupon.edit', ['id'=> $item->id])}}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a>
                                         <button onclick="deleteItem('coupon',{{ $item->id }})" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                 </tr>

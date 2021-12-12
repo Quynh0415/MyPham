@@ -9,7 +9,7 @@ function deleteItem(model, id) {
     var result = confirm("Bạn có chắc chắn muốn xóa ?");
     if (result) { // neu nhấn == ok , sẽ send request ajax
         $.ajax({
-            url: model+'/'+id, // ........../admin/banner/3
+            url: '/admin/' + model + '/' +id,
             type: 'DELETE',
             //data: {}, // dữ liệu truyền sang nếu có
             dataType: "json", // kiểu dữ liệu nhận về

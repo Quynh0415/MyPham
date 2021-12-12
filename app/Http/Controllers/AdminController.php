@@ -224,7 +224,7 @@ class AdminController extends Controller
     }
 
     public function logout(){
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
         return redirect()->route('admin.login');
     }
@@ -248,7 +248,7 @@ class AdminController extends Controller
         $checkLogin = Auth::guard('admin')->attempt($dataLogin, $request->has('remember'));
         // kiểm tra xem có đăng nhập thành côngh với email và password đã nhập hay không
         if ($checkLogin) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.admin.dashboard');
         }
 
         return redirect()->back()->with('msg', 'Email hoặc Password không chính xác');;

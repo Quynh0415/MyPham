@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Thêm Mã Giảm Giá <a href="{{route('coupon.index')}}" type="button"
+            Thêm Mã Giảm Giá <a href="{{route('admin.coupon.index')}}" type="button"
                                  class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
@@ -20,7 +20,7 @@
                         <h3 class="box-title">Thông tin mã giảm giá</h3>
                     </div>
 
-                    <form role="form" action="{{ route('coupon.store') }}" method="post"
+                    <form role="form" action="{{ route('admin.coupon.store') }}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">

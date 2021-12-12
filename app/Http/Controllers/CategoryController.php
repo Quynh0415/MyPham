@@ -92,7 +92,7 @@ class CategoryController extends Controller
         $category->save();
 
         // chuyen dieu huong trang
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -175,7 +175,7 @@ class CategoryController extends Controller
         $category->save();
 
         // chuyen dieu huong trang
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**

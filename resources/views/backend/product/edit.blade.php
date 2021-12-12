@@ -3,7 +3,8 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Chi tiết sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a>
+            Chi tiết sản phẩm <a href="{{route('admin.product.index')}}" class="btn btn-flat btn-success">Danh Sách
+                SP</a>
         </h1>
     </section>
     <!-- Main content -->
@@ -15,7 +16,7 @@
                 </div>
 
                 <div class="box-body">
-                    <form role="form" action="{{ route('product.update',['id'=>$product->id])}}" method="post"
+                    <form role="form" action="{{ route('admin.product.update',['id'=>$product->id])}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -59,54 +60,86 @@
                                                                             class="help-block"> {{$errors->first('categories_id')}} </span>
                                                                     </select>
                                                                 </div>
-                                                @if($errors->has('brands_id'))
-                                                <div class="col-md-6 has-error">
-                                                    @else
-                                                    <div class="col-md-6">
-                                                        @endif
-                                                    <label>Thương hiệu</label>
-                                                    <select class="form-control w-50" name="brands_id">
-                                                        <option value="0">--Chọn Thương Hiệu--</option>
-                                                        @foreach($brands as $brand)
-                                                            <option value="{{$brand->id}}" {{($brand->id == $product->brands_id) ? 'selected' : ''}}>{{$brand->name}}</option>
-                                                        <span class="help-block">{{$errors->first('brands_id')}}</span>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="checkbox">
-                                                                        <label>
-                                                                            <input type="checkbox" value="1"
-                                                                                   name="is_active" {{ ($product->is_active == 1 ) ? 'checked': '' }}>
-                                                                            Trạng thái hiển thị
-                                                                        </label>
+                                                                @if($errors->has('brands_id'))
+                                                                    <div class="col-md-6 has-error">
+                                                                        @else
+                                                                            <div class="col-md-6">
+                                                                                @endif
+                                                                                <label>Thương hiệu</label>
+                                                                                <select class="form-control w-50"
+                                                                                        name="brands_id">
+                                                                                    <option value="0">--Chọn Thương
+                                                                                        Hiệu--
+                                                                                    </option>
+                                                                                    @foreach($brands as $brand)
+                                                                                        <option
+                                                                                            value="{{$brand->id}}" {{($brand->id == $product->brands_id) ? 'selected' : ''}}>{{$brand->name}}</option>
+                                                                                        <span
+                                                                                            class="help-block">{{$errors->first('brands_id')}}</span>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="checkbox">
+                                                                                    <label>
+                                                                                        <input type="checkbox" value="1"
+                                                                                               name="is_active" {{ ($product->is_active == 1 ) ? 'checked': '' }}>
+                                                                                        Trạng thái hiển thị
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label for="exampleInputEmail1">Vị
+                                                                                    trí</label>
+                                                                                <input type="number"
+                                                                                       class="form-control"
+                                                                                       id="position" name="position"
+                                                                                       value="{{ $product->position }}">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="checkbox">
+                                                                                    <label>
+                                                                                        <input
+                                                                                            {{ ($product->is_hot == 1 ) ? 'checked': '' }} type="checkbox"
+                                                                                            value="1" name="is_hot">
+                                                                                        Sản phẩm hot
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="checkbox">
+                                                                                    <label>
+                                                                                        <input
+                                                                                            {{ ($product->prod_new == 1 ) ? 'checked': '' }} type="checkbox"
+                                                                                            value="1" name="prod_new">
+                                                                                        Sản phẩm mới
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label> </label>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="form-group">
-                                                                    <label>Nội dung</label>
-                                                                    <textarea id="editor1" name="content"
-                                                                              class="form-control"
-                                                                              rows="10"
-                                                                              placeholder="Enter ...">{{$product->content}}</textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Mô tả</label>
-                                                                    <textarea id="editor2" name="description"
-                                                                              class="form-control"
-                                                                              rows="10"
-                                                                              placeholder="Enter ...">{{$product->description}}</textarea>
-                                                                </div>
-                                                                <div class="box-footer">
-                                                                    <button type="submit" class="btn btn-primary">Cập
-                                                                        nhật
-                                                                    </button>
-                                                                </div>
-                                                            </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="form-group">
+                                                                            <label>Nội dung</label>
+                                                                            <textarea id="editor1" name="content"
+                                                                                      class="form-control"
+                                                                                      rows="10"
+                                                                                      placeholder="Enter ...">{{$product->content}}</textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Mô tả</label>
+                                                                            <textarea id="editor2" name="description"
+                                                                                      class="form-control"
+                                                                                      rows="10"
+                                                                                      placeholder="Enter ...">{{$product->description}}</textarea>
+                                                                        </div>
+                                                                        <div class="box-footer">
+                                                                            <button type="submit"
+                                                                                    class="btn btn-primary">Cập
+                                                                                nhật
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                     </form>
 
                 </div>
@@ -119,7 +152,7 @@
                     <h4>Thêm biến thể sản phẩm</h4>
                 </div>
                 <div class="box-body">
-                    <form role="form" action="{{ route('products_detail.store')}}" method="post"
+                    <form role="form" action="{{ route('admin.products_detail.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -153,39 +186,16 @@
                                                            value="{{old('price')}}">
                                                     <span class="help-block"> {{$errors->first('price')}} </span>
                                                 </div>
-                                                @if($errors->has('sale'))
-                                                    <div class="col-md-6 has-error">
-                                                        @else
-                                                            <div class="col-md-6">
-                                                                @endif
-                                                                <label for="exampleInputEmail1">Giá KM</label>
-                                                                <input type="text" class="form-control" id="sale"
-                                                                       name="sale"
-                                                                       value="{{old('sale')}}">
-                                                                <span
-                                                                    class="help-block"> {{$errors->first('sale')}} </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" value="1" name="is_hot">
-                                                                        Sản phẩm hot
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" value="1"
-                                                                               name="prod_new">
-                                                                        Sản phẩm mới
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="box-footer">
-                                                                <button type="submit" class="btn btn-primary">Lưu
-                                                                </button>
-                                                            </div>
+                                    <div class="col-md-6">
+                                        <label for="exampleInputEmail1">Giá KM</label>
+                                        <input type="text" class="form-control" id="sale"
+                                               name="sale"
+                                               value="{{old('sale')}}">
+                                        <button type="submit" class="btn btn-primary">Lưu
+                                        </button>
+                                    </div>
+
+
                     </form>
                 </div>
             </div>
@@ -204,8 +214,6 @@
                             <th>Số lượng</th>
                             <th>Màu</th>
                             <th>Đơn giá</th>
-                            <th>SP HOT</th>
-                            <th>SP Mới</th>
                             <th class="text-center">Tác vụ</th>
                         </tr>
                         </thead>
@@ -221,11 +229,9 @@
                                 </td>
                                 <td>{{ $item->color }}</td>
                                 <td>{{ $item->price }}</td>
-                                <td>{{ ($item->is_hot == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
-                                <td>{{ ($item->prod_new == 1) ? 'Hiển thị' : 'Ẩn' }}</td>
                                 <td class="text-center">
                                     <a data-target="#myModal-{{$key}}" data-toggle="modal"
-{{--                                       href="{{route('products_detail.edit',['id'=>$item->id])}}"--}}
+                                       {{--                                       href="{{route('products_detail.edit',['id'=>$item->id])}}"--}}
                                        class="btn btn-primary">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
@@ -247,7 +253,7 @@
                                                     </div>
                                                     <div class="cart-r" style="width: 100%">
                                                         <form role="form"
-                                                              action="{{ route('products_detail.update', ['id'=>$item->id])}}"
+                                                              action="{{ route('admin.products_detail.update', ['id'=>$item->id])}}"
                                                               method="post" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
@@ -275,14 +281,14 @@
                                                                        value="{{$item->stock}}">
 
                                                             </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="exampleInputEmail1">Đơn
-                                                                        Giá</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="price"
-                                                                           name="price"
-                                                                           value="{{$item->price}}">
-                                                                </div>
+                                                            <div class="col-md-6">
+                                                                <label for="exampleInputEmail1">Đơn
+                                                                    Giá</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="price"
+                                                                       name="price"
+                                                                       value="{{$item->price}}">
+                                                            </div>
                                                             <div class="col-md-6">
                                                                 <label for="exampleInputEmail1">Giá
                                                                     KM</label>
@@ -292,31 +298,14 @@
                                                                        name="sale"
                                                                        value="{{$item->sale}}">
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input
-                                                                            {{ ($item->is_hot == 1 ) ? 'checked': '' }} type="checkbox"
-                                                                            value="1" name="is_hot">
-                                                                        Sản phẩm hot
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input
-                                                                            {{ ($item->prod_new == 1 ) ? 'checked': '' }} type="checkbox"
-                                                                            value="1" name="prod_new">
-                                                                        Sản phẩm mới
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="box-footer">
+
+                                                            <div class="col-md-12">
                                                                 <button type="submit"
                                                                         class="btn btn-primary">Lưu
                                                                 </button>
-                                                                <button type="button" class="btn close pull-right" data-dismiss="modal">Close
+
+                                                                <button type="button" class="btn close pull-right"
+                                                                        data-dismiss="modal">Close
                                                                 </button>
                                                             </div>
 

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
+use App\Category;
 use App\Order;
+use App\Product;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,11 +18,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-//        $order = Order::all();
-//
-//        return view('frontend.order.index',[
-//            'order' => $order,
-//        ]);
+        $order = Order::all();
+         return view('backend.order.index',[
+             'order' => $order,
+         ]);
     }
 
     /**
@@ -84,6 +87,19 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // gọi tới hàm destroy của laravel để xóa 1 object
+        // DELETE FROM ten_bang WHERE id = 33 -> execute command
+        $isDelete = Order::destroy($id); // return 1 | 0, true  false
+
+        if ($isDelete) { // xóa thành công
+            $statusCode = 200;
+            $isSuccess = true;
+        } else {
+            $statusCode = 400;
+            $isSuccess = false;
+        }
+
+        // Trả về dữ liệu json và trạng thái kèm theo thành công là 200
+        return response()->json(['isSuccess' => $isSuccess], $statusCode);
     }
 }

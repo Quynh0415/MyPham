@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Chỉnh sửa Tin Tức<a href="{{ route('article.index') }}" type="button"
+            Chỉnh sửa Tin Tức<a href="{{ route('admin.article.index') }}" type="button"
                                 class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
@@ -19,7 +19,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ route('article.update', ['id' => $data->id ]) }}" method="post"
+                    <form role="form" action="{{ route('admin.article.update', ['id' => $data->id ]) }}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

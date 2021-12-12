@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Thêm Mới Thương Hiệu <a href="{{route('brand.index')}}" type="button"
+            Thêm Mới Thương Hiệu <a href="{{route('admin.brand.index')}}" type="button"
                                  class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
@@ -20,7 +20,7 @@
                         <h3 class="box-title">Thông Tin Thương Hiệu</h3>
                     </div>
 
-                    <form role="form" action="{{ route('brand.store') }}" method="post"
+                    <form role="form" action="{{ route('admin.brand.store') }}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">

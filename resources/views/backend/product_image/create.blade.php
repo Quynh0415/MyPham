@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>Ảnh chi tiết sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a></h1>
+        <h1>Ảnh chi tiết sản phẩm <a href="{{route('admin.product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a></h1>
     </section>
         <div class="row">
             <div class="col-md-6">
@@ -10,7 +10,7 @@
                     <div class="box-header with-border">
                         <h4>Thêm ảnh sản phẩm</h4>
                     </div>
-                    <form role="form" action="{{route('product_image.store')}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{route('admin.product_image.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{$product->id}}">
                         <div class="box-body">

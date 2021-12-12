@@ -71,6 +71,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
         $product->content = $request->input('content');
+        $product->position = $request->input('position');
         $product->description = $request->input('description');
         $product->slug = Str::slug($request->input('name'));
         // Upload file
@@ -92,9 +93,23 @@ class ProductController extends Controller
         }
         $product->is_active = $is_active;
 
+        // Sản phẩm Hot
+        $is_hot = 0 ;
+        if ($request->has('is_hot')){
+            $is_hot = $request->input('is_hot');
+        }
+        $product->is_hot=$is_hot;
+
+        //San pham moi
+        $prod_new = 0 ;
+        if ($request->has('prod_new')){
+            $prod_new = $request->input('prod_new');
+        }
+        $product->prod_new=$prod_new;
+
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -164,6 +179,7 @@ class ProductController extends Controller
         $product->categories_id = $request->input('categories_id');
         $product->brands_id = $request->input('brands_id');
         $product->content = $request->input('content');
+        $product->position = $request->input('position');
         $product->description = $request->input('description');
         $product->slug = Str::slug($request->input('name'));
         // Upload file
@@ -181,15 +197,30 @@ class ProductController extends Controller
 
             $product->image = $path_upload.$filename; // gán giá trị ảnh mới cho thuộc tính image của đối tượng
         }
+
         $is_active = 0;// mặc định gán không hiển thị
         if ($request->has('is_active')) { // kiem tra is_active co ton tai khong ?
             $is_active = $request->input('is_active');
         }
         $product->is_active = $is_active;
 
+        // Sản phẩm Hot
+        $is_hot = 0 ;
+        if ($request->has('is_hot')){
+            $is_hot = $request->input('is_hot');
+        }
+        $product->is_hot=$is_hot;
+
+        //San pham moi
+        $prod_new = 0 ;
+        if ($request->has('prod_new')){
+            $prod_new = $request->input('prod_new');
+        }
+        $product->prod_new=$prod_new;
+
         $product->save();
 
-        return redirect()->route('product.edit',$id);
+        return redirect()->route('admin.product.edit',$id);
     }
 
     /**
@@ -215,4 +246,16 @@ class ProductController extends Controller
         // Trả về dữ liệu json và trạng thái kèm theo thành công là 200
         return response()->json(['isSuccess' => $isSuccess], $statusCode);
     }
+    public function  changeStatus(Request $request) {
+        $product = Product::findOrFail($request->id);
+        if($product) {
+            $product->is_active = $request->is_active;
+            $product->save();
+
+            return response()->json($product);
+        }else {
+            return response('Có lỗi xảy ra', 404);
+        }
+    }
+
 }

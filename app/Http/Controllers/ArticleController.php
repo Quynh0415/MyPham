@@ -101,7 +101,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect()->route('article.index');
+        return redirect()->route('admin.article.index');
     }
 
     /**
@@ -203,7 +203,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect()->route('article.index');
+        return redirect()->route('admin.article.index');
     }
 
     /**

@@ -75,7 +75,7 @@ class BrandController extends Controller
             // get ten
             $filename = time() . '_' . $file->getClientOriginalName();
             // duong dan upload
-            $path_upload = 'uploads/category/';
+            $path_upload = 'uploads/brand/';
             // upload file
             $request->file('image')->move($path_upload, $filename);
 
@@ -95,7 +95,7 @@ class BrandController extends Controller
 
         $brand->save();
 
-        return redirect()->route('brand.index');
+        return redirect()->route('admin.brand.index');
     }
 
     /**
@@ -106,7 +106,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $brand = Brand::findOrFail(id);
+        $brand = Brand::findOrFail($id);
 
         return view('backend.brand.show',[
             'brand' => $brand,
@@ -137,27 +137,26 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|unique:categories,name|max:255',
-            //kiem tra input có name="name"
-//            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
-            'image' => 'required|mimes:ipeg,jpg,png',
-            //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
-
-            'position' => 'required|integer|min:0',
-            'is_active' => 'integer|min:0|max:1',
-        ], [
-            'name.required' => 'Tên danh mục không được để trống',
-            'name.unique' => 'Dữ liệu bị trùng',
-            'name.max' => 'Độ dài tối đa 255 kí tự',
-            'image.required' => 'Yêu cầu không được để trống',
-            'image.mimes    ' => 'Không đúng định dạng ảnh',
-        ]);
+//        $request->validate([
+//            'name' => 'required|unique:categories,name|max:255',
+//            //kiem tra input có name="name"
+////            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
+//            'image' => 'required|mimes:ipeg,jpg,png',
+//            //exit kiểm tra dữ liệu có tồn tại trong bảng categories cột id hay k
+//
+//            'position' => 'required|integer|min:0',
+//            'is_active' => 'integer|min:0|max:1',
+//        ], [
+//            'name.required' => 'Tên danh mục không được để trống',
+//            'name.unique' => 'Dữ liệu bị trùng',
+//            'name.max' => 'Độ dài tối đa 255 kí tự',
+//            'image.required' => 'Yêu cầu không được để trống',
+//            'image.mimes    ' => 'Không đúng định dạng ảnh',
+//        ]);
 
         $brand = Brand::findOrFail($id);
         $brand->name = $request->input('name');
         $brand->slug = Str::slug($request->input('name'));
-
 
         if ($request->hasFile('new_image')) {
             // xóa file cũ
@@ -167,7 +166,7 @@ class BrandController extends Controller
             // get tên
             $filename = time() . '_' . $file->getClientOriginalName();
             // duong dan upload
-            $path_upload = 'uploads/category/';
+            $path_upload = 'uploads/brand/';
             // upload file
             $request->file('new_image')->move($path_upload, $filename);
 
@@ -179,6 +178,7 @@ class BrandController extends Controller
             $is_active = $request->input('is_active');
         }
         $brand->is_active = $is_active;
+
         $position = 0;
         if ($request->has('position')) {
             $position = $request->input('position');
@@ -187,7 +187,7 @@ class BrandController extends Controller
 
         $brand->save();
 
-        return redirect()->route('brand.edit');
+        return redirect()->route('admin.brand.index');
     }
 
     /**

@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Thêm mới danh mục <a href="{{route('category.index')}}" type="button"
+            Thêm mới danh mục <a href="{{route('admin.category.index')}}" type="button"
                                  class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
@@ -20,7 +20,7 @@
                         <h3 class="box-title">Thông tin danh mục</h3>
                     </div>
 
-                    <form role="form" action="{{ route('category.update',['id'=>$cates->id])}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('admin.category.update',['id'=>$cates->id])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="box-body">

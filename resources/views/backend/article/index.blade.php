@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Danh Sách Tin Tức <a href="{{route('article.create')}}" type="button" class="btn bg-olive btn-flat margin">Thêm
+            Danh Sách Tin Tức <a href="{{route('admin.article.create')}}" type="button" class="btn bg-olive btn-flat margin">Thêm
                 Tin Tức</a>
         </h1>
         <ol class="breadcrumb">
@@ -53,7 +53,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{route('article.edit',['id'=>$item->id])}}" class="btn btn-info">
+                                        <a href="{{route('admin.article.edit',['id'=>$item->id])}}" class="btn btn-info">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                         <button onclick="deleteItem('article',{{ $item->id }})" class="btn btn-danger">

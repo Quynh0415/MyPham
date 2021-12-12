@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Thêm mới sản phẩm <a href="{{route('product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a>
+            Thêm mới sản phẩm <a href="{{route('admin.product.index')}}" class="btn btn-flat btn-success">Danh Sách SP</a>
         </h1>
     </section>
 
@@ -14,11 +14,11 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Thông tin sản phẩm</h3>
+                        <h3 class="box-title"><b>Thông tin sản phẩm</b></h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="{{route('product.store')}}" method="post"
+                    <form role="form" action="{{route('admin.product.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">
@@ -89,8 +89,31 @@
                                                 </label>
                                             </div>
                                         </div>
-                                                                </div>
-                                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="exampleInputEmail1">Vị trí</label>
+                                            <input type="number" class="form-control" id="position" name="position"
+                                                   value="0">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="1" name="is_hot">
+                                                    <b>Sản phẩm hot</b>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="1"
+                                                           name="prod_new">
+                                                    <b>Sản phẩm mới</b>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <label>Nội dung</label>

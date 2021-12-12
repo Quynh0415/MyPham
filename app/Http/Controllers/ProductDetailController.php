@@ -52,7 +52,7 @@ class ProductDetailController extends Controller
         ],[
             'stock.required' => 'Số lượng không được để trống',
             'price.required' => 'Đơn giá không được để trống',
-            'sale.required' => 'Giá KM không được để trống',
+//            'sale.required' => 'Giá KM không được để trống',
         ]);
         $product_detail = new ProductDetail();
         $product_detail->size = $request->input('size');
@@ -62,23 +62,9 @@ class ProductDetailController extends Controller
         $product_detail->sale = $request->input('sale');
         $product_detail->color = $request->input('color');
 
-        // Sản phẩm Hot
-        $is_hot = 0 ;
-        if ($request->has('is_hot')){
-            $is_hot = $request->input('is_hot');
-        }
-        $product_detail->is_hot=$is_hot;
-
-        //San pham moi
-        $prod_new = 0 ;
-        if ($request->has('prod_new')){
-            $prod_new = $request->input('prod_new');
-        }
-        $product_detail->prod_new=$prod_new;
-
         $product_detail->save();
 
-        return redirect()->route('product.edit', $request->product_id);
+        return redirect()->route('admin.product.edit', $request->product_id);
 
     }
 
@@ -124,7 +110,7 @@ class ProductDetailController extends Controller
         ],[
             'stock.required' => 'Số lượng không được để trống',
             'price.required' => 'Đơn giá không được để trống',
-            'sale.required' => 'Giá KM không được để trống',
+//            'sale.required' => 'Giá KM không được để trống',
         ]);
         $product_detail = ProductDetail::findOrFail($id);
         $product_detail->size = $request->input('size');
@@ -133,23 +119,11 @@ class ProductDetailController extends Controller
         $product_detail->sale = $request->input('sale');
         $product_detail->color = $request->input('color');
 
-        // Sản phẩm Hot
-        $is_hot = 0 ;
-        if ($request->has('is_hot')){
-            $is_hot = $request->input('is_hot');
-        }
-        $product_detail->is_hot=$is_hot;
 
-        //San pham moi
-        $prod_new = 0 ;
-        if ($request->has('prod_new')){
-            $prod_new = $request->input('prod_new');
-        }
-        $product_detail->prod_new=$prod_new;
 
         $product_detail->save();
 //dd(route('product.edit',$request->product_id));
-        return redirect()->route('product.edit',$request->product_id);
+        return redirect()->route('admin.product.edit',$request->product_id);
     }
 
     /**

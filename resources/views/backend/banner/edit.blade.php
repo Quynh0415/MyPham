@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Cập nhật Banner <a href="{{ route('banner.index') }}" type="button" class="btn bg-olive btn-flat margin">Danh Sách</a>
+            Cập nhật Banner <a href="{{ route('admin.banner.index') }}" type="button" class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
 
@@ -20,7 +20,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ route('banner.update', ['id' => $banner->id ]) }}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('admin.banner.update', ['id' => $banner->id ]) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="box-body">

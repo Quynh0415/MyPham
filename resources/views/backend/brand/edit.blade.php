@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Thêm mới danh mục <a href="{{route('brand.index')}}" type="button"
+            Thêm mới thương hiệu <a href="{{route('admin.brand.index')}}" type="button"
                                  class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>
@@ -17,10 +17,10 @@
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Thông tin danh mục</h3>
+                        <h3 class="box-title">Thông tin thương hiệu</h3>
                     </div>
 
-                    <form role="form" action="{{ route('brand.update',['id'=>$brand->id])}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{ route('admin.brand.update',['id'=>$brand->id])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="box-body">
@@ -34,14 +34,19 @@
                                             <input value="{{$brand->name}}" type="text" class="form-control" id="title" name="name" placeholder="Nhập tên thương hiệu">
                                             <span class="help-block"> {{$errors->first('name')}} </span>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">Change File</label>
-                                                <input type="file" id="new_image" name="new_image"><br>
-                                                @if ($brand->image)
-                                                    <img src="{{asset($brand->image)}}" width="200">
-                                                @endif
-                                            </div>
+                                        @if($errors ->has('image'))
+                                            <div class="form-group has-error">
+                                                @else
+                                                    <div class="form-group">
+                                                        @endif
+                                                        <label for="exampleInputFile">Ảnh</label>
+                                                        <input type="file" id="new_image" name="new_image"><br>
+                                                        @if ($brand->image)
+                                                            <img src="{{asset($brand->image)}}" width="200">
+                                                        @endif
+                                                        <span class="help-block"> {{$errors->first('image')}} </span>
+
+                                                    </div>
 
                                             <div class="row">
                                                 <div class="col-md-6">

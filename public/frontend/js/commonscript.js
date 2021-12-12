@@ -43,28 +43,28 @@ tabs.forEach((tab, index) => {
     };
 })
 
-// // // Rateting js
-// // $(':radio').change(function() {
-// //     console.log('New star rating: ' + this.value);
-// // });
-// var value = parseInt(document.querySelector('.input-qty').value, 10);
-// var maxProduct = document.querySelector('.input-qty').getAttribute('max')
+Rateting js
+ $(':radio').change(function() {
+     console.log('New star rating: ' + this.value);
+ });
+ var value = parseInt(document.querySelector('.input-qty').value, 10);
+ var maxProduct = document.querySelector('.input-qty').getAttribute('max')
 
-// function minusProduct() {
-//     if (value > 0) {
-//         value = isNaN(value) ? 1 : value;
-//         value--;
-//     }
+ function minusProduct() {
+     if (value > 0) {
+         value = isNaN(value) ? 1 : value;
+         value--;
+     }
 
-//     document.querySelector('.input-qty').value = value;
-// }
+     document.querySelector('.input-qty').value = value;
+ }
 
-// function plusProduct() {
-//     value = isNaN(value) ? 0 : value;
-//     value++;
-//     if (value > maxProduct) {
-//         value = maxProduct;
-//         alert('Số sản phẩm trong kho của shop đã đạt  giới hạn')
-//     }
-//     document.querySelector('.input-qty').value = value;
-// }
+ function plusProduct() {
+     value = isNaN(value) ? 0 : value;
+     value++;
+     if (value > maxProduct) {
+         value = maxProduct;
+         alert('Số sản phẩm trong kho của shop đã đạt  giới hạn')
+     }
+     document.querySelector('.input-qty').value = value;
+}
