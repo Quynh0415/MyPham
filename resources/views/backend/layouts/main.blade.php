@@ -74,6 +74,6 @@
 <script src="/backend/js/main.js"></script>
 
 @yield('script')
-
+@yield('js')
 </body>
 </html>

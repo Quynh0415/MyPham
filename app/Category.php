@@ -14,7 +14,6 @@ class Category extends Model
 
     public function childs()
     {
-        // belongsto mối quan hệ nghịch đảo một danh mục con  chỉ ở 1 danh mục cha
         return $this->hasMany("App\Category", "parents_id");
     }
 

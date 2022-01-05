@@ -58,14 +58,14 @@
                                 @endphp
                                 @if($first_detail->sale <= 0)
                                     <div class="product__price">
-                                        {{ $first_detail->price }}đ
+                                        {{ number_format($first_detail->price, 0,",",".") }}đ
                                     </div>
                                 @else
                                     <div class="product__price">
                                         <div class="price__old">
-                                            {{ $first_detail->price }}đ
+                                            {{ number_format($first_detail->price, 0,",",".") }}đ
                                         </div>
-                                        <div class="price__new">{{$first_detail->price - ($first_detail->price * $first_detail->sale * 0.01)}}<span class="price__unit">đ</span></div>
+                                        <div class="price__new">{{number_format($first_detail->price - ($first_detail->price * $first_detail->sale * 0.01), 0,",",".")}}<span class="price__unit">đ</span></div>
                                     </div>
                                 @endif
                                 @if($first_detail->sale <= 0)
@@ -100,14 +100,14 @@
                                 @endphp
                                 @if($first_detail->sale <= 0)
                                     <div class="product__price">
-                                        {{ $first_detail->price }}đ
+                                        {{ number_format($first_detail->price, 0,",",".") }}đ
                                     </div>
                                 @else
                                     <div class="product__price">
                                         <div class="price__old">
-                                            {{ $first_detail->price }}đ
+                                            {{ number_format($first_detail->price, 0,",",".") }}đ
                                         </div>
-                                        <div class="price__new">{{$first_detail->price - ($first_detail->price * $first_detail->sale * 0.01)}}<span class="price__unit">đ</span></div>
+                                        <div class="price__new">{{number_format($first_detail->price - ($first_detail->price * $first_detail->sale * 0.01), 0,",",".")}}<span class="price__unit">đ</span></div>
                                     </div>
                                 @endif
                                 @if($first_detail->sale <= 0)

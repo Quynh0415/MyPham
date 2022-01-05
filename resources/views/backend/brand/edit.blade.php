@@ -24,7 +24,6 @@
                         @csrf
                         @method('PUT')
                         <div class="box-body">
-
                             @if($errors->has('name'))
                                 <div class="form-group has-error">
                                     @else

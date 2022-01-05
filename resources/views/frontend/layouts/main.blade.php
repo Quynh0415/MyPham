@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- https://cocoshop.vn/ -->
-<!-- http://mauweb.monamedia.net/vanihome/ -->
 
 <head>
 
@@ -37,59 +35,83 @@
     @yield('content')
 
     @include('frontend.layouts.footer')
+
 </section>
 <!-- Modal Form -->
 <div class="ModalForm">
     <div class="modal" id="my-Register">
         <a href="#" class="overlay-close"></a>
-        <div class="authen-modal register">
-            <h3 class="authen-modal__title">Đăng Kí</h3>
-            <div class="form-group">
-                <label for="account" class="form-label">Họ Tên</label>
-                <input id="account" name="account" type="text" class="form-control">
+        <form action="{{ route('dangky') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="authen-modal register">
+                @if (session('msg'))
+                    <div class="form-group" style="font-size: 15px; padding-bottom: 10px; color: #9ad717">
+                        <div class="alert alert-success alert-dismissible" style="" id="thongbao">
+                            <h4><i class="icon fa fa-check"></i> Thông báo !</h4>
+                            {{ session('msg') }}
+                        </div>
+                    </div>
+                @endif
+                <h3 class="authen-modal__title">Đăng Kí</h3>
+                <div class="form-group">
+                    <label for="name" class="form-label">Họ Tên</label>
+                    <input id="name" name="name" type="text" class="form-control">
+                        {{ old('name') }}
+                    <span class="form-message">{{$errors->first('name')}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Tài khoản Email *</label>
+                    <input id="email" name="email" type="email" class="form-control">
+                    {{ old('email') }}
+                    <span class="form-message">{{$errors->first('email')}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Mật khẩu *</label>
+                    <input id="password" name="password" type="password" class="form-control">
+                    {{ old('password') }}
+                    <span class="form-message">{{$errors->first('password')}}</span>
+                </div>
+{{--                <div class="form-group">--}}
+{{--                    <label for="password" class="form-label">Nhập lại mật khẩu *</label>--}}
+{{--                    <input id="password" name="password" type="text" class="form-control">--}}
 
-                <span class="form-message"></span>
+{{--                    <span class="form-message"></span>--}}
+{{--                </div>--}}
+                <div class="authen__btns">
+                    <button class="btn btn--default">Đăng Kí</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password" class="form-label">Tài khoản Email *</label>
-                <input id="password" name="password" type="text" class="form-control">
-                <span class="form-message"></span>
-            </div>
-            <div class="form-group">
-                <label for="password" class="form-label">Mật khẩu *</label>
-                <input id="password" name="password" type="text" class="form-control">
-                <span class="form-message"></span>
-            </div>
-            <div class="form-group">
-                <label for="password" class="form-label">Nhập lại mật khẩu *</label>
-                <input id="password" name="password" type="text" class="form-control">
-                <span class="form-message"></span>
-            </div>
-            <div class="authen__btns">
-                <div class="btn btn--default">Đăng Kí</div>
-            </div>
-        </div>
+        </form>
     </div>
     <div class=" modal" id="my-Login">
         <a href="#" class="overlay-close"></a>
         <div class="authen-modal login">
+            @if (session('msg'))
+                <div class="form-group has-feedback"><a href="#" style="color: red">{{ session('msg') }}</a></div>
+            @endif
+            <form role="form" action="{{ route('dangnhap') }}" method="POST">
+            @csrf
             <h3 class="authen-modal__title">Đăng Nhập</h3>
             <div class="form-group">
-                <label for="account" class="form-label">Địa chỉ email *</label>
-                <input id="account" name="account" type="text" class="form-control">
-                <span class="form-message"></span>
+                <label for="email" class="form-label">Địa chỉ email *</label>
+                <input id="email" name="email" type="email" class="form-control">
+                <span class="form-message">{{ $errors->first('email') }}</span>
             </div>
             <div class="form-group">
                 <label for="password" class="form-label">Mật khẩu *</label>
-                <input id="password" name="password" type="text" class="form-control">
-                <span class="form-message"></span>
+                <input id="password" name="password" type="password" class="form-control">
+
+                <span class="form-message">{{ $errors->first('password') }}</span>
             </div>
+
             <div class="authen__btns">
-                <div class="btn btn--default">Đăng Nhập</div>
+                <button class="btn btn--default">Đăng Nhập</button>
                 <input type="checkbox" class="authen-checkbox">
+
                 <label class="form-label">Ghi nhớ mật khẩu</label>
             </div>
             <a class="authen__link">Quên mật khẩu ?</a>
+            </form>
         </div>
     </div>
     <div class="up-top" id="upTop" onclick="goToTop()">
@@ -258,7 +280,7 @@
         }
     })
 </script>
-
+@yield('my-script')
 <!-- Script common -->
 
 </body>

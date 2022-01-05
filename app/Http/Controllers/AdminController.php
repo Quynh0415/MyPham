@@ -8,7 +8,8 @@ use App\Product;
 use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -21,7 +22,8 @@ class AdminController extends Controller
     {
         $data = Admin::all();
 
-        return view('backend.admin.index', ['data' => $data]);
+        return view('backend.admin.index', [
+            'data' => $data]);
     }
 
     /**
@@ -31,9 +33,18 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+//        $currentAdmin = Admin::findOrFail(Auth()->user()->id);
+//        if ( $currentAdmin->can('checkAdmin', Admin::class) ) {
 
-        return view('backend.admin.create', ['roles' => $roles]);
+            $roles = Role::all();
+
+            return view('backend.admin.create', [
+            'roles' => $roles]);
+//        } else {
+//            return view('backend.errors.400');
+//        }
+
+
     }
 
     /**

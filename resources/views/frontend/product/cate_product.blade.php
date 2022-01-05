@@ -19,19 +19,6 @@
                         <a href="#" class="breadcrumb__link"></a>
                     </div>
                 </div>
-                <div class="main__sort">
-                    <h3 class="sort__title">
-                        Hiển thị kết quả theo
-                    </h3>
-                    <select class="sort__select"> name="" id="">
-                        <option value="1">Thứ tự mặc định</option>
-                        <option value="2">Mức độ phổ biến</option>
-                        <option value="3">Điểm đánh giá</option>
-                        <option value="4">Mới cập nhật</option>
-                        <option value="5">Giá : Cao đến thấp</option>
-                        <option value="6">Giá Thấp đến cao</option>
-                    </select>
-                </div>
             </div>
             <div class="productList">
                 <div class="listProduct">

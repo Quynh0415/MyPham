@@ -17,19 +17,7 @@
                        </div>
 
                 </div>
-{{--                <div class="main__sort">--}}
-{{--                    <h3 class="sort__title">--}}
-{{--                        Hiển thị kết quả theo--}}
-{{--                    </h3>--}}
-{{--                    <select class="sort__select"> name="" id="">--}}
-{{--                        <option value="1">Thứ tự mặc định</option>--}}
-{{--                        <option value="2">Mức độ phổ biến</option>--}}
-{{--                        <option value="3">Điểm đánh giá</option>--}}
-{{--                        <option value="4">Mới cập nhật</option>--}}
-{{--                        <option value="5">Giá : Cao đến thấp</option>--}}
-{{--                        <option value="6">Giá Thấp đến cao</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
+
             </div>
             <div class="productList">
                 <div class="listProduct">
@@ -46,14 +34,14 @@
                                         @endphp
                                         @if($first_detail->sale <= 0)
                                             <div class="product__price">
-                                                    {{ $first_detail->price }}đ
+                                                    {{ number_format($first_detail->price, 0,",",".") }}đ
                                             </div>
                                         @else
                                         <div class="product__price">
                                             <div class="price__old">
                                                 {{ $first_detail->price }}đ
                                             </div>
-                                            <div class="price__new">{{$first_detail->price - ($first_detail->price * $first_detail->sale * 0.01)}}<span class="price__unit">đ</span></div>
+                                            <div class="price__new">{{number_format($first_detail->price - ($first_detail->price * $first_detail->sale * 0.01), 0,",",".")}}<span class="price__unit">đ</span></div>
                                         </div>
                                         @endif
                                         @if($first_detail->sale <= 0)
@@ -83,18 +71,6 @@
                         </li>
                         <li class="pagination__item">
                             <a href="listFilm.html" class="pagination__link">2</a>
-                        </li>
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">3</a>
-                        </li>
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">4</a>
-                        </li>
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">5</a>
-                        </li>
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">...</a>
                         </li>
                         <li class="pagination__item active">
                             <a href="listFilm.html" class="pagination__link">14</a>

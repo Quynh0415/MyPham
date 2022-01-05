@@ -186,14 +186,18 @@
                                                            value="{{old('price')}}">
                                                     <span class="help-block"> {{$errors->first('price')}} </span>
                                                 </div>
-                                    <div class="col-md-6">
-                                        <label for="exampleInputEmail1">Giá KM</label>
-                                        <input type="text" class="form-control" id="sale"
-                                               name="sale"
-                                               value="{{old('sale')}}">
-                                        <button type="submit" class="btn btn-primary">Lưu
-                                        </button>
-                                    </div>
+                                                <div class="col-md-6">
+                                                    <label for="exampleInputEmail1">Khuyến mại</label>
+                                                    <input type="text" class="form-control" id="sale"
+                                                           name="sale"
+                                                           value="{{old('sale')}}">
+                                                    <button type="submit" class="btn btn-primary">Lưu
+                                                    </button>
+                                                </div>
+
+
+
+
 
 
                     </form>
@@ -298,6 +302,12 @@
                                                                        name="sale"
                                                                        value="{{$item->sale}}">
                                                             </div>
+{{--                                                            <div class="col-md-6">--}}
+{{--                                                                <label for="exampleInputEmail1">Giá sau KM</label>--}}
+{{--                                                                <input type="text" class="form-control" id="subtotal"--}}
+{{--                                                                       name="sale"--}}
+{{--                                                                       value="">{{$item->subtotal}}--}}
+{{--                                                            </div>--}}
 
                                                             <div class="col-md-12">
                                                                 <button type="submit"

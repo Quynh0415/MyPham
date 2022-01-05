@@ -19,12 +19,13 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
+                                <td>TT</td>
                                 <th>Họ & Tên</th>
                                 <th>Email</th>
                                 <th>SĐT</th>
                                 <th>Địa chỉ</th>
                                 <th>Nội dung</th>
-                                <th>Trạng thái</th>
+{{--                                <th>Trạng thái</th>--}}
                                 <th class="text-center">Tác vụ</th>
                             </tr>
                             </thead>
@@ -33,20 +34,15 @@
                             <!-- Lặp một mảng dữ liệu pass sang view để hiển thị -->
                             @foreach($contact as $key => $item)
                                 <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
+                                    <td>{{$key + 1}}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
                                     <td>{{ $item->content }}</td>
-                                    <td>
-                                        @if($item->status == 2)
-                                            {{'Chưa xử lý'}}
-                                        @elseif($item->status == 3)
-                                            {{'Đã xử lý'}}
-                                        @else
-                                            {{''}}
-                                        @endif
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        <span class="label label-success">Mới</span>--}}
+{{--                                    </td>--}}
                                     <td class="text-center">
                                         <!-- Thêm sự kiện onlick cho nút xóa -->
                                         <button onclick="deleteItem('contact',{{ $item->id }})" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>

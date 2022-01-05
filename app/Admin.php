@@ -30,4 +30,9 @@ class Admin extends Authenticatable
 
     protected $table = "admin";
 
+    public function roles()
+    {
+        return $this->belongsTo('App\Role', 'roles_id', 'id');
+    }
+
 }

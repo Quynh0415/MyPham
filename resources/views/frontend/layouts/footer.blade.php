@@ -6,13 +6,13 @@
                 <h3 class="footer__title">Menu</h3>
                 <ul class="footer__list">
                     <li class="footer__item">
-                        <a href="#" class="footer__link">Mỹ phẩm</a>
+                        <a href="#" class="footer__link">Chăm sóc Body</a>
                     </li>
                     <li class="footer__item">
                         <a href="#" class="footer__link">Chăm sóc da</a>
                     </li>
                     <li class="footer__item">
-                        <a href="#" class="footer__link">Làm đẹp</a>
+                        <a href="#" class="footer__link">Trang điểm</a>
                     </li>
                 </ul>
             </div>

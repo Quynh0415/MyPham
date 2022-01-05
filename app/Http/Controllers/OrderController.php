@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banner;
 use App\Category;
 use App\Order;
+use App\OrderStatus;
 use App\Product;
 use App\Setting;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class OrderController extends Controller
     {
         $order = Order::all();
          return view('backend.order.index',[
-             'order' => $order,
+             'orders' => $order,
          ]);
     }
 
@@ -31,7 +32,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $orders_status = OrderStatus::all();
+
+        return view('backend.order.index',[
+            'orders_status' => $orders_status
+        ]);
     }
 
     /**
@@ -53,7 +58,10 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::findOrfail($id);
+        return view('backend.order.edit',[
+            'order' => $order,
+        ]);
     }
 
     /**
@@ -64,7 +72,13 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::find($id);
+        $order_status = OrderStatus::all();
+
+        return view('backend.order.edit',[
+            'orders' => $order,
+            'order_status' => $order_status,
+        ]);
     }
 
     /**
@@ -76,7 +90,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $content = $request->content;
+        $id_status = $request->orders_status_id;
+
+        $order = Order::findorFail($id);
+
+        $order->content = $content;
+        $order->orders_status_id = $id_status;
+        $order->save();
+        return redirect()->back()->with('msg', 'Cập nhật đơn hàng thành công');
     }
 
     /**

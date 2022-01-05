@@ -76,7 +76,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="" class="img-circle" alt="User Image">
+                            <img src="{{ (asset(Auth::guard('admin')->user()->avatar)) ? Auth::guard('admin')->user()->avatar : '' }}" class="img-circle" alt="User Image">
 
                             <p>
                                 {{ Auth::guard('admin')->user()->name }}

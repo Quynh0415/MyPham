@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -14,6 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         //
+        return view('backend.dashboard.inven_product');
     }
 
     /**
@@ -84,6 +88,33 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        return view('backend.dashboard');
+        $numProduct = Product::count();
+        $numOrder = Order::count();
+        $orders = Order::where('orders_status_id',1)->orderby('id','DASC')->limit(6)->get();
+
+
+        $ton_kho = DB::table('products_detail')-> selectRaw('count(products_detail.id) as ton_kho')
+            ->whereRaw('products_detail.id not in (select orders_detail.products_id  from orders_detail)')
+            ->get();
+
+        $moneyDay = Order::whereDay('updated_at',date('d'))->where('orders_status_id',3)->sum('total');
+        $moneyMonth = Order::whereMonth('updated_at',date('m'))->where('orders_status_id',3)->sum('total');
+        $moneyYear = Order::whereYear('updated_at',date('Y'))->where('orders_status_id',3)->sum('total');
+
+
+//dd($ton_kho);
+        return view('backend.dashboard.dashboard',[
+            'numProduct' => $numProduct,
+            'numOrder' => $numOrder,
+            'moneyDay' => $moneyDay,
+            'moneyMonth' => $moneyMonth,
+            'moneyYear' => $moneyYear,
+            'orders' =>$orders,
+        ]);
+    }
+
+    public function  invenProduct()
+    {
+        return view('backend.dashboard.inven_product');
     }
 }

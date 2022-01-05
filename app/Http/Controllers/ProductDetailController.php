@@ -58,6 +58,7 @@ class ProductDetailController extends Controller
         $product_detail->size = $request->input('size');
         $product_detail->products_id = $request->input('product_id');
         $product_detail->stock = $request->input('stock');
+        $product_detail->quantity = $request->input('quantity');
         $product_detail->price = $request->input('price');
         $product_detail->sale = $request->input('sale');
         $product_detail->color = $request->input('color');
@@ -115,6 +116,7 @@ class ProductDetailController extends Controller
         $product_detail = ProductDetail::findOrFail($id);
         $product_detail->size = $request->input('size');
         $product_detail->stock = $request->input('stock');
+        $product_detail->quantity = $request->input('quantity');
         $product_detail->price = $request->input('price');
         $product_detail->sale = $request->input('sale');
         $product_detail->color = $request->input('color');

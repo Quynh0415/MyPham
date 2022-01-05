@@ -8,12 +8,17 @@ use App\Brand;
 use App\Category;
 use App\Contact;
 use App\Order;
+use App\OrderDetail;
 use App\Product;
 use App\ProductDetail;
 use App\ProductImage;
 use App\Setting;
+use App\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use League\Flysystem\Exception;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
 class HomeController extends Controller
@@ -44,6 +49,18 @@ class HomeController extends Controller
             'setting' => $setting,
             'categories' =>$category,
             'brand' => $brand,
+        ]);
+    }
+
+    public function notFound()
+    {
+//        $banner = Banner::where('is_active', '1')->orderBy('position')->get();
+//        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+//        $setting = Setting::first();
+        return view('errors.404',[
+//            'banner' => $banner,
+//            'setting' => $setting,
+//            'categories' => $category,
         ]);
     }
 
@@ -83,12 +100,12 @@ class HomeController extends Controller
     {
         $banner = Banner::where('is_active', '1')->orderBy('position')->get();
         $setting = Setting::first();
-        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+        $category = Category::where(['slug' => $slug],['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
         //$product = Product::where(['slug' => $slug], ['is_active' => 1] )->first();
         $product = Product::where(['categories_id' => $category->first()->id])->get();
 
 
-        return view('frontend.product.brand_product',[
+        return view('frontend.product.cate_product',[
             'banner' => $banner,
             'setting' => $setting,
             'product' => $product,
@@ -100,21 +117,25 @@ class HomeController extends Controller
     {
         $banner = Banner::where('is_active', '1')->orderBy('position')->get();
         $product = Product::where(['slug' => $slug], ['is_active' => 1] )->first();
-        $sameProduct = Product::where([['is_active', '=', 1],
-            ['brands_id', '=', $product->first()->brands_id],
-            ['id', '<>' , $product->first()->id]])
-            ->limit(5)->get();
-        $menu = Brand::where([['is_active', '=', 1]])->orderBy('position', 'asc')->get();
         $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
         $setting = Setting::first();
+        $brands = Brand::where(['slug' => $slug])->get();
+        //$product = Product::where(['slug' => $slug], ['is_active' => 1] )->first();
+        $sameProducts = Product::where([['is_active', '=', 1],
+            ['brands_id', '=', $product->brands_id],
+            ['id', '<>' , $product->id]])
+            ->latest()->take(4)->get();
+//        dd($);
+        $menu = Brand::where([['is_active', '=', 1]])->orderBy('position', 'asc')->get();
         return view('frontend.product.product_detail',[
             'product' => $product,
-            'sameProduct' => $sameProduct,
+            'sameProducts' => $sameProducts,
             'banner' => $banner,
             'setting' => $setting,
             'menu' => $menu,
             'categories' => $category,
         ]);
+
     }
 
     public function article()
@@ -203,6 +224,122 @@ class HomeController extends Controller
         return redirect()->back()->with('msg', 'Gửi yêu cầu thành công, chúng tôi sẽ liên hệ tới bạn sớm nhất.');
 
     }
+
+    public function order()
+    {
+        $banner = Banner::where('is_active', '1')->orderBy('position')->get();
+        $setting = Setting::first();
+        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+
+        return view('frontend.order.order_detail',[
+            'banner' => $banner,
+            'setting' => $setting,
+            'categories' => $category,
+        ]);
+    }
+
+    public function viewMessage()
+    {
+        $banner = Banner::where('is_active', '1')->orderBy('position')->get();
+        $setting = Setting::first();
+        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+
+        return view('frontend.order.message',[
+            'banner' => $banner,
+            'setting' => $setting,
+            'categories' => $category,
+        ]);
+    }
+
+    public function postOrder(Request $request)
+    {
+        $request->validate([
+            'cus_name' => 'required|max:255',
+            //kiem tra input có name="name"
+//            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
+            'cus_email'=>'required',
+  //          'cus_address'=>'required',
+            'cus_phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+        ], [
+            'cus_name.required' => 'Tên không được để trống',
+            'cus_email.required' => 'Email không được để trống',
+   //         'cus_address.required' => 'Địa chỉ không được để trống',
+            'cus_phone.required' => 'Số điện thoại không được để trống',
+        ]);
+        $cart = Cart::content();
+        $subPrice =intval(Cart::subtotal(0,"",""));
+//        dd($subPrice);
+
+        $order = new Order();
+        $order->cus_name = $request->input('cus_name');
+        $order->cus_email = $request->input('cus_email');
+        $order->cus_phone = $request->input('cus_phone');
+        $order->cus_address = $request->input('cus_address');
+        $order->other_address = $request->input('other_address');
+        $order->total = $request->input('total');
+        $order->subtotal = $request->input('subtotal');
+        $order->discount = $request->input('discount');
+        $order->content = $request->input('content');
+        $order->total = $subPrice;
+        $order->orders_status_id = 1;
+        $order->save();
+        $maDonHang = 'DH-'.$order->id.'-'.date('d').date('m').date('Y'); // Tạo mã đơn hàng.
+        $order->code = $maDonHang;
+        $order->save();
+
+//dd($cart);
+        foreach ($cart as $key => $item) {
+            $_detail = new OrderDetail();
+            $_detail->orders_id = $order->id;
+            $_detail->name = $item->name;
+//                $_detail->package = $item->options->package;
+            $_detail->image = $item->options->image;
+            $_detail->products_id = $item->id;
+            $_detail->quantity = $item->qty;
+            $_detail->price = $item->price;
+//            dd( $item->size);
+            $_detail->color_size = $item->options['color_size'];
+            $product = ProductDetail::where([['products_id', '=', $item->id ],['color', 'LIKE',$item->options->color]])
+                ->orWhere([['products_id', '=', $item->id ],['size' , 'LIKE', $item->options->size]])->first();
+            $old_stock =  $product->stock;
+            $product->stock = $old_stock - $item->qty;
+            $product->save();
+            $_detail->save();
+
+        }
+
+            Cart::destroy();
+            return redirect()->route('msg')->with('msg', 'Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ giao hàng tới bạn trong thời gian sớm nhất. Mã đơn hàng của bạn là: #'.$order->code);
+
+    }
+
+    public function search(Request $request)
+    {
+        $banner = Banner::where('is_active', '1')->orderBy('position')->get();
+        $setting = Setting::first();
+        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+
+        // b1. Lấy từ khóa tìm kiếm
+        $keyword = $request->input('tu-khoa');
+
+        $slug = Str::slug($request->input('tu-khoa'));
+
+        //$sql = "SELECT * FROM products WHERE is_active = 1 AND slug like '%$keyword%'";
+
+        $products = Product::where([['slug', 'like', '%' . $slug . '%'], ['is_active', '=', 1]])->get();
+
+//        $totalResult = $product->total(); // số lượng kết quả tìm kiếm
+
+        return view('frontend.product.search_product', [
+            'products' => $products,
+//            'totalResult' => $totalResult,
+            'keyword' => $keyword,
+            'banner' => $banner,
+            'setting' => $setting,
+            'categories' => $category,
+        ]);
+    }
+
 
 
     /**

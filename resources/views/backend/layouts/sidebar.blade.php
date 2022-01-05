@@ -54,6 +54,18 @@
             </li>
 
             <li class="">
+                <a href="{{route('admin.order.index')}}">
+                    <i class="fa fa-shopping-cart"></i> QL Đơn Hàng
+                </a>
+            </li>
+
+            <li class="">
+                <a href="{{route('admin.user.index')}}">
+                    <i class="fa fa-users"></i> QL Khách Hàng
+                </a>
+            </li>
+
+            <li class="">
                 <a href="{{route('admin.coupon.index')}}">
                     <i class="glyphicon glyphicon-gift"></i> QL Mã Giảm Giá
                 </a>
