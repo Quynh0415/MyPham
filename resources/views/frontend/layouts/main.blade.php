@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <base href="{{ asset('') }}">
+{{--        <base href="{{ asset('') }}">--}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Beauty Mona</title>
         <!-- Font roboto -->
@@ -16,16 +16,17 @@
         <!-- Icon fontanwesome -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <!-- Reset css & grid sytem -->
-        <link rel="stylesheet" href="frontend/css/library.css">
-        <link href="frontend/owlCarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('frontend/css/library.css')}}">
+        <link href="{{asset('frontend/owlCarousel/assets/owl.carousel.min.css')}}" rel="stylesheet" />
         <!-- Layout -->
-        <link rel="stylesheet" href="frontend/css/common.css">
+        <link rel="stylesheet" href="{{asset('frontend/css/common.css')}}">
         <!-- index -->
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Owl caroucel Js-->
-        <script src="frontend/owlCarousel/owl.carousel.min.js"></script>
-@show
+        <script src="{{asset('frontend/owlCarousel/owl.carousel.min.js')}}"></script>
+    <!--Bootstrap CDN-->
+  @show
 </head>
 
 <body>
@@ -86,8 +87,13 @@
     <div class=" modal" id="my-Login">
         <a href="#" class="overlay-close"></a>
         <div class="authen-modal login">
-            @if (session('msg'))
-                <div class="form-group has-feedback"><a href="#" style="color: red">{{ session('msg') }}</a></div>
+            @if (session('msg1'))
+                <div class="form-group" style="font-size: 15px; padding-bottom: 10px; color: #9ad717">
+                    <div class="alert alert-success alert-dismissible" style="" id="thongbao">
+                        <h4><i class="icon fa fa-check"></i> Thông báo !</h4>
+                        {{ session('msg1') }}
+                    </div>
+                </div>
             @endif
             <form role="form" action="{{ route('dangnhap') }}" method="POST">
             @csrf
@@ -100,17 +106,22 @@
             <div class="form-group">
                 <label for="password" class="form-label">Mật khẩu *</label>
                 <input id="password" name="password" type="password" class="form-control">
-
                 <span class="form-message">{{ $errors->first('password') }}</span>
             </div>
 
-            <div class="authen__btns">
-                <button class="btn btn--default">Đăng Nhập</button>
-                <input type="checkbox" class="authen-checkbox">
+{{--            <div class="authen__btns">--}}
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn--default">Đăng Nhập</button>
 
-                <label class="form-label">Ghi nhớ mật khẩu</label>
-            </div>
-            <a class="authen__link">Quên mật khẩu ?</a>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="checkbox" class="authen-checkbox">
+                        <label class="form-label">Ghi nhớ mật khẩu</label>
+                    </div>
+                </div>
+                {{--            </div>--}}
+                {{--            <a class="authen__link">Quên mật khẩu ?</a>--}}
             </form>
         </div>
     </div>
@@ -118,10 +129,10 @@
         <i class="fas fa-chevron-up"></i>
     </div>
 </div>
-<script src="frontend/js/homeScript.js"></script>
-<script src="frontend/js/commonscript.js"></script>
-<script src="/frontend/js/sweetalert.min.js"></script>
-<script src="/frontend/js/toastr.js"></script>
+<script src="{{asset('frontend/js/homeScript.js')}}"></script>
+<script src="{{asset('frontend/js/commonscript.js')}}"></script>
+<script src="{{asset('/frontend/js/sweetalert.min.js')}}"></script>
+<script src="{{asset('/frontend/js/toastr.js')}}"></script>
 <script>
     $('.owl-carousel.hight').owlCarousel({
         loop: true,

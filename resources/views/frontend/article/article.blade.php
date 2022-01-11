@@ -2,7 +2,7 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/new.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/new.css')}}">
 @endsection
 @section('content')
     <div class="grid wide">

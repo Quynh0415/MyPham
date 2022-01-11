@@ -62,7 +62,11 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contact = Contact::findOrfail($id);
+
+        return view('backend.contact.edit',[
+            'contact' => $contact,
+        ]);
     }
 
     /**
@@ -74,7 +78,34 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            //kiem tra input có name="name"
+//            required: kiểm tra có bổ trống hay k, unique: kiểm tra trùng dữ liệu --tên bảng--tên cột, max: đọ dài tối đa
+            'email'=>'required',
+            'address'=>'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'content' => 'required'
+
+        ], [
+            'name.required' => 'Tên không được để trống',
+            'email.required' => 'Email không được để trống',
+            'address.required' => 'Địa chỉ không được để trống',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'content.required' => 'Nội dung không được để trống',
+        ]);
+        $contact = Contact::findOrFail($id);
+        $contact->name = $request->input('name');
+        $contact->email = $request->input('email');
+        $contact->address = $request->input('address');
+        $contact->phone = $request->input('phone');
+        $contact->content = $request->input('content');
+        $contact->status = $request->input('status');
+        $contact->slug = Str::slug($request->input('name'));
+
+        $contact->save();
+
+        return redirect()->route('admin.contact.index');
     }
 
     /**

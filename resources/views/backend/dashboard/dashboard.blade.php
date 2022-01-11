@@ -49,14 +49,14 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{$numUser}}</h3>
 
-                        <h4>Tồn kho</h4>
+                        <h4>Người dùng</h4>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="{{route('admin.dashboard.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{route('admin.user.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -64,18 +64,56 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{number_format($numTotal,0,",",".")}} đ</h3>
 
-                        <h4>Bài viết</h4>
+                        <h4>Tổng doanh thu</h4>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="fa fa-money"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{route('tongdoanhthu')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
         </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Liên hệ</span>
+                        <span class="info-box-number">{{$numContact}}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-leanpub"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Bài viết</span>
+                        <span class="info-box-number">{{$numArticle}}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Đơn đang xử lý</span>
+                        <span class="info-box-number">{{$numProcess}}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-remove"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Đơn đã hủy</span>
+                        <span class="info-box-number">{{$numCancel}}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
 {{--        <div class="box">--}}
 {{--            <div class="box box-default">--}}
 {{--                <div class="box-header with-border">--}}
@@ -149,37 +187,37 @@
 @endsection
 
 
-@section('script')
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['bar']});
-        google.charts.setOnLoadCallback(drawChart);
+{{--@section('script')--}}
+{{--    <script type="text/javascript">--}}
+{{--        google.charts.load('current', {'packages':['bar']});--}}
+{{--        google.charts.setOnLoadCallback(drawChart);--}}
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Doanh thu', 'Doanh thu'],
-                ['Ngày', {{ $moneyDay }}],
-                ['Tháng', {{ $moneyMonth }}],
-                ['Năm', {{ $moneyYear }}],
+{{--        function drawChart() {--}}
+{{--            var data = google.visualization.arrayToDataTable([--}}
+{{--                ['Doanh thu', 'Doanh thu'],--}}
+{{--                ['Ngày', {{ $moneyDay }}],--}}
+{{--                ['Tháng', {{ $moneyMonth }}],--}}
+{{--                ['Năm', {{ $moneyYear }}],--}}
 
-            ]);
+{{--            ]);--}}
 
-            var options = {
-                chart: {
-                    title: 'Thống kê doanh thu',
-                    subtitle: 'Theo ngày, tháng, năm',
-                },
-                bars: 'vertical',
-                vAxis: {format: 'decimal'},
-                height: 400,
-                colors: ['#1b9e77', '#d95f02', '#7570b3']
-            };
+{{--            var options = {--}}
+{{--                chart: {--}}
+{{--                    title: 'Thống kê doanh thu',--}}
+{{--                    subtitle: 'Theo ngày, tháng, năm',--}}
+{{--                },--}}
+{{--                bars: 'vertical',--}}
+{{--                vAxis: {format: 'decimal'},--}}
+{{--                height: 400,--}}
+{{--                colors: ['#1b9e77', '#d95f02', '#7570b3']--}}
+{{--            };--}}
 
-            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+{{--            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));--}}
 
-            chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-    </script>
-@endsection
+{{--            chart.draw(data, google.charts.Bar.convertOptions(options));--}}
+{{--        }--}}
+{{--    </script>--}}
+{{--@endsection--}}
 
 @section('script')
 @endsection

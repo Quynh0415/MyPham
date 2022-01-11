@@ -39,11 +39,11 @@
                                     <td>{{ $item->cus_phone }}</td>
                                     <td>{{ $item->created_at}}</td>
                                     <td>
-                                            @if ($item->orders_status_id == 1)
+                                            @if ($item->orders_status_id === 1)
                                                 <span class="label label-info">Mới</span>
-                                            @elseif ($item->orders_status_id == 2)
-                                                <span class="label label-warning">Đang XL</span>
-                                            @elseif ($item->orders_status_id == 3)
+                                            @elseif ($item->orders_status_id === 0)
+                                                <span class="label label-warning">Đang xử lý</span>
+                                            @elseif ($item->orders_status_id === 3)
                                                 <span class="label label-success">Hoàn thành</span>
                                             @else
                                                 <span class="label label-danger">Hủy</span>

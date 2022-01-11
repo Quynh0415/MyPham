@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Thêm mới danh mục <a href="{{route('admin.category.index')}}" type="button"
+            Sửa danh mục <a href="{{route('admin.category.index')}}" type="button"
                                  class="btn bg-olive btn-flat margin">Danh Sách</a>
         </h1>
     </section>

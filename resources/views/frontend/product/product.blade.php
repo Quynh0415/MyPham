@@ -1,11 +1,14 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/product.css">
-    <link rel="stylesheet" type="text/css" href="frontend/css/productSale.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/product.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/productSale.css')}}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
 @endsection
 @section('content')
     <div class="main">
+
         <div class="grid wide">
             <div class="main__taskbar">
                 <div class="main__breadcrumb">
@@ -13,7 +16,7 @@
                         <a href="#" class="breadcrumb__link">Trang chủ</a>
                     </div>
                     <div class="breadcrumb__item">
-                        <a href="#" class="breadcrumb__link">Cửa hàng</a>
+                        <a href="{{ route('sanpham') }}" class="breadcrumb__link">Cửa hàng</a>
                        </div>
 
                 </div>
@@ -59,29 +62,32 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="pagination">
-                    <ul class="pagination__list">
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                        </li>
-                        <li class="pagination__item active">
-                            <a href="listFilm.html" class="pagination__link">1</a>
-                        </li>
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">2</a>
-                        </li>
-                        <li class="pagination__item active">
-                            <a href="listFilm.html" class="pagination__link">14</a>
-                        </li>
-                        <li class="pagination__item">
-                            <a href="listFilm.html" class="pagination__link">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+
+                        {!! $product->links()!!}
+
+{{--                <div class="pagination">--}}
+{{--                    <ul class="pagination__list">--}}
+{{--                        <li class="pagination__item">--}}
+{{--                            <a href="listFilm.html" class="pagination__link">--}}
+{{--                                <i class="fas fa-chevron-left"></i>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li class="pagination__item active">--}}
+{{--                            <a href="listFilm.html" class="pagination__link">1</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="pagination__item">--}}
+{{--                            <a href="listFilm.html" class="pagination__link">2</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="pagination__item active">--}}
+{{--                            <a href="listFilm.html" class="pagination__link">14</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="pagination__item">--}}
+{{--                            <a href="listFilm.html" class="pagination__link">--}}
+{{--                                <i class="fas fa-chevron-right"></i>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>

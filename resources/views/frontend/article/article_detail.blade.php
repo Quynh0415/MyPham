@@ -1,8 +1,8 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/new.css">
-    <link rel="stylesheet" type="text/css" href="frontend/css/product.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/new.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/product.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 @endsection

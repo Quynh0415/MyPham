@@ -1,8 +1,8 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/pay.css">
-    <link rel="stylesheet" href="frontend/css/common.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/pay.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/common.css')}}">
 
 @endsection
 @section('content')
@@ -50,7 +50,7 @@
                         <div class="pay__heading">Đơn hàng của bạn</div>
                         @foreach(Cart::content() as $item)
                             <div class="pay-info">
-                                <div class="main__pay-text ">
+                                <div class="main__pay-text special">
                                     {{ $item->name }}
                                 </div>
                                 <div class="main__pay-price ">
@@ -66,6 +66,11 @@
                                 Giao hàng miễn phí
                             </div>
 
+                        </div>
+                        <div class="pay-info">
+                            <div class="main__pay-text special">
+                                Thanh toán sau khi nhận hàng
+                            </div>
                         </div>
                         <div class="pay-info">
                             <div class="main__pay-text special">

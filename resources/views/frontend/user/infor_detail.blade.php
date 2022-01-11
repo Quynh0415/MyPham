@@ -1,8 +1,8 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/pay.css">
-    <link rel="stylesheet" href="frontend/css/common.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/pay.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/common.css')}}">
 
 @endsection
 @section('content')

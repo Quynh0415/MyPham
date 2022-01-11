@@ -1,8 +1,9 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/product.css">
-    <link rel="stylesheet" type="text/css" href="frontend/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/product.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/bootstrap.min.css')}}">
+
 @endsection
 @section('content')
     <div class="main">
@@ -17,7 +18,7 @@
                     </div>
                     @foreach($brand as $item)
                     <div class="breadcrumb__item">
-                        <a href="" class="breadcrumb__link">{{ $item->name }}</a>
+                        <a href="{{ route('sanphamtheohang',$item['slug']) }}" class="breadcrumb__link">{{ $item->name }}</a>
                     </div>
                     @endforeach
                 </div>
@@ -38,21 +39,21 @@
                                             @endphp
                                             @if($first_detail->sale <= 0)
                                                 <div class="product__price">
-                                                    {{ $first_detail->price }}đ
+                                                    {{ number_format($first_detail->price,0,",",".") }}đ
                                                 </div>
                                             @else
                                                 <div class="product__price">
                                                     <div class="price__old">
-                                                        {{ $first_detail->price }}đ
+                                                        {{ number_format($first_detail->price,0,",",".") }}đ
                                                     </div>
-                                                    <div class="price__new">{{$first_detail->price - ($first_detail->price * $first_detail->sale * 0.01)}}<span class="price__unit">đ</span></div>
+                                                    <div class="price__new">{{number_format($first_detail->price - ($first_detail->price * $first_detail->sale * 0.01), 0,",",".")}}<span class="price__unit">đ</span></div>
                                                 </div>
                                             @endif
                                             @if($first_detail->sale <= 0)
                                             @else
                                                 <div class="product__sale">
                                                     <span class="product__sale-text">Giảm</span>
-                                                    <span class="product__sale-percent">{{ $first_detail->sale }}%</span>
+                                                    <span class="product__sale-percent">{{ number_format($first_detail->sale,  0,",",".") }}%</span>
 
                                                 </div>
                                             @endif

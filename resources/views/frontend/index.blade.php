@@ -1,7 +1,7 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link href="frontend/css/home.css" rel="stylesheet" />
+    <link href="{{asset('frontend/css/home.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')

@@ -189,7 +189,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return redirect()->back()->with('msg', 'Email hoặc Password không chính xác');
+        return redirect()->back()->with('msg1', 'Email hoặc Password không chính xác');
     }
 
 

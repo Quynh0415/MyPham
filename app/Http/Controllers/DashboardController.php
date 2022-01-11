@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Contact;
 use App\Order;
+use App\OrderDetail;
 use App\Product;
+use App\User;
+use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -89,32 +94,51 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $numProduct = Product::count();
+
         $numOrder = Order::count();
-        $orders = Order::where('orders_status_id',1)->orderby('id','DASC')->limit(6)->get();
+
+        $orders = Order::where('orders_status_id', 1)->orderby('id','DASC')->limit(10)->get();
+
+        $numUser = User::count();
+
+        $numTotal = Order::where('orders_status_id', 3)->sum('total');
+
+        $numContact = Contact::count();
+
+        $numArticle = Article::count();
+
+        $numProcess = Order::where('orders_status_id', 0)->count();
+
+        $numCancel = Order::where('orders_status_id', 4)->count();
 
 
-        $ton_kho = DB::table('products_detail')-> selectRaw('count(products_detail.id) as ton_kho')
-            ->whereRaw('products_detail.id not in (select orders_detail.products_id  from orders_detail)')
-            ->get();
-
-        $moneyDay = Order::whereDay('updated_at',date('d'))->where('orders_status_id',3)->sum('total');
-        $moneyMonth = Order::whereMonth('updated_at',date('m'))->where('orders_status_id',3)->sum('total');
-        $moneyYear = Order::whereYear('updated_at',date('Y'))->where('orders_status_id',3)->sum('total');
+//        $moneyDay = Order::whereDay('updated_at',date('d'))->where('orders_status_id',3)->sum('total');
+//        $moneyMonth = Order::whereMonth('updated_at',date('m'))->where('orders_status_id',3)->sum('total');
+//        $moneyYear = Order::whereYear('updated_at',date('Y'))->where('orders_status_id',3)->sum('total');
 
 
 //dd($ton_kho);
         return view('backend.dashboard.dashboard',[
             'numProduct' => $numProduct,
             'numOrder' => $numOrder,
-            'moneyDay' => $moneyDay,
-            'moneyMonth' => $moneyMonth,
-            'moneyYear' => $moneyYear,
+            'numUser' => $numUser,
+            'numTotal' => $numTotal,
+            'numContact' => $numContact,
+            'numArticle' => $numArticle,
+            'numProcess' => $numProcess,
+            'numCancel' => $numCancel,
+//            'moneyDay' => $moneyDay,
+//            'moneyMonth' => $moneyMonth,
+//            'moneyYear' => $moneyYear,
             'orders' =>$orders,
         ]);
     }
 
-    public function  invenProduct()
+    public function totalProduct()
     {
-        return view('backend.dashboard.inven_product');
+        $orders = Order::where('orders_status_id',3)->orderby('id','DASC')->get();
+        return view('backend.dashboard.total_product',[
+            'orders' => $orders,
+        ]);
     }
 }

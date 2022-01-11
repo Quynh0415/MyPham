@@ -70,6 +70,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->input('name');
         $product->categories_id = $request->input('categories_id');
+        $product->brands_id = $request->input('brands_id');
         $product->content = $request->input('content');
         $product->position = $request->input('position');
         $product->description = $request->input('description');

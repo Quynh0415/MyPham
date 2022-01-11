@@ -20,6 +20,6 @@ class Category extends Model
     // 1 danh mục có nhiều sản phẩm
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Product','categories_id','id');
     }
 }

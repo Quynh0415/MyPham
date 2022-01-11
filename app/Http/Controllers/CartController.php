@@ -83,18 +83,13 @@ class CartController extends Controller
 
     public function removeProduct($rowId)
     {
-        $banner = Banner::where('is_active', '1')->orderBy('position')->get();
-        $setting = Setting::first();
-        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+//        $banner = Banner::where('is_active', '1')->orderBy('position')->get();
+//        $setting = Setting::first();
+//        $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
 
         Cart::remove($rowId);
 
-        return view('frontend.order.order',[
-            'banner' => $banner,
-            'setting' => $setting,
-            'categories' =>$category,
-
-        ]);
+        return back();
 
     }
 

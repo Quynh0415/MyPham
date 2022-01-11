@@ -61,7 +61,7 @@ Route::get('/thong-tin', 'UserController@edit')->name('thongtin');
 Route::put('/cap-nhat-thong-tin', 'UserController@update')->name('capnhatthongtin');
 Route::get('/don-hang-dn', 'UserController@edit')->name('donhangdn');
 Route::get('/gio-hang/cap-nhat-so-luong-sp', 'CartController@update')->name('capnhatgiohang');
-
+Route::get('tong-doanh-thu', 'DashboardController@totalProduct')->name('tongdoanhthu');
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'middleware' => 'checkLogin'],function (){

@@ -1,8 +1,8 @@
 @extends('frontend.layouts.main')
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="frontend/css/product.css">
-    <link rel="stylesheet" type="text/css" href="frontend/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/product.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/bootstrap.min.css')}}">
 @endsection
 @section('content')
     <div class="main">
@@ -17,7 +17,7 @@
                             </a>
                             @foreach($product->products_image as $item)
                                 <a class="product">
-                                    <div class="product__avt" style="background-image: url({{$item->image}})">
+                                    <div class="product__avt" style="background-image: url({{asset($item->image)}})">
 
                                     </div>
                                 </a>
@@ -26,13 +26,13 @@
                         <div class="owl-carousel owl-theme" id="sync2">
                             <a class="product">
 
-                                <div class="product__avt" style="background-image: url({{$product->image}})">
+                                <div class="product__avt" style="background-image: url({{asset($product->image)}})">
 
                                 </div>
                             </a>
                             @foreach($product->products_image as $item)
                                 <a class="product">
-                                    <div class="product__avt" style="background-image: url({{$item->image}})">
+                                    <div class="product__avt" style="background-image: url({{asset($item->image)}})">
 
                                     </div>
                                 </a>
@@ -48,7 +48,7 @@
                                 <a href="{{ route('sanpham') }}" class="breadcrumb__link">Sản Phẩm</a>
                             </div>
                             <div class="breadcrumb__item">
-                                <a href="" class="breadcrumb__link">{{ $product->brands->name }}</a>
+                                <a href="{{ route('sanphamtheohang',$product->brands['slug']) }}" class="breadcrumb__link">{{ $product->brands->name }}</a>
                             </div>
                         </div>
                         <h3 class="productInfo__name">
@@ -60,7 +60,7 @@
                             @endphp
                             <span>{{number_format($first_detail->price - ($first_detail->price * $first_detail->sale * 0.01), 0,",",".")}} <span
                                     class="priceInfo__unit">đ</span></span>
-                            @if($first_detail->sale>0)
+                            @if($first_detail->sale>0 || $first_detail->sale = '' )
                                 <span style="color: black; font-size: 16px"><del>{{number_format($first_detail->price, 0,",",".")}}đ</del></span>
                             @endif
                         </div>

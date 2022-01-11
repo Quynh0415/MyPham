@@ -32,10 +32,10 @@ class HomeController extends Controller
     {
         $banner = Banner::where('is_active', '1')->orderBy('position')->get();
         $product = Product::limit(8)->get();
-        $hotProducts = Product::where('is_hot', '1')
-            ->get();
-        $newProducts = Product::where('prod_new', '1')
-            ->get();
+        $hotProducts = Product::where('is_hot', '1')->orderBy('position', 'ASC')
+            ->paginate(6);
+        $newProducts = Product::where('prod_new', '1')->orderBy('position', 'ASC')
+            ->paginate(6);
         $article = Article::where(['is_active'=>1])->where(['is_hot'=> 1])->limit(4)->get();
         $setting = Setting::first();
         $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
@@ -67,7 +67,7 @@ class HomeController extends Controller
     public function product()
     {
         $banner = Banner::where('is_active', '1')->orderBy('position')->get();
-        $product = Product::where(['is_active' => '1'])->get();
+        $product = Product::where(['is_active' => '1'])->paginate(18);
         $category = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
         $setting = Setting::first();
         return view('frontend.product.product',[
@@ -100,16 +100,17 @@ class HomeController extends Controller
     {
         $banner = Banner::where('is_active', '1')->orderBy('position')->get();
         $setting = Setting::first();
-        $category = Category::where(['slug' => $slug],['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
-        //$product = Product::where(['slug' => $slug], ['is_active' => 1] )->first();
-        $product = Product::where(['categories_id' => $category->first()->id])->get();
+        $categories = Category::where(['is_active' => 1])->where(['parents_id' => 0])->orderBy('position', 'ASC')->get();
+        $category =  Category::where('slug',$slug)->where('is_active',1)->first();
 
+        $products = $category->products;
+//        dd($products);
 
         return view('frontend.product.cate_product',[
             'banner' => $banner,
             'setting' => $setting,
-            'product' => $product,
-            'categories' => $category,
+            'product' => $products,
+            'categories' => $categories,
         ]);
     }
 
@@ -124,7 +125,7 @@ class HomeController extends Controller
         $sameProducts = Product::where([['is_active', '=', 1],
             ['brands_id', '=', $product->brands_id],
             ['id', '<>' , $product->id]])
-            ->latest()->take(4)->get();
+            ->latest()->take(6)->get();
 //        dd($);
         $menu = Brand::where([['is_active', '=', 1]])->orderBy('position', 'asc')->get();
         return view('frontend.product.product_detail',[
@@ -217,6 +218,7 @@ class HomeController extends Controller
         $contact->address = $request->input('address');
         $contact->phone = $request->input('phone');
         $contact->content = $request->input('content');
+        $contact->status = $request->input('status');
         $contact->slug = Str::slug($request->input('name'));
 
         $contact->save();
@@ -307,6 +309,19 @@ class HomeController extends Controller
             $_detail->save();
 
         }
+
+        $to_mail = $order->cus_email;
+        $content =array('name'=>$order->cus_name,'email'=>$order->cus_email, 'address' =>$order->cus_address,
+            'orderId'=>$maDonHang, 'phone'=>$order->cus_phone,
+            'total'=>$order->total, 'item' => $cart,
+
+        );
+        //        $order = $this->postOrder($request, null);
+        Mail::send('email.email', $content,
+            function($message) use ($to_mail){
+                $message->to($to_mail, 'Beauty Mona')->subject('Đơn hàng mới');
+                $message->from('admin@BeautyMona.com', 'Beauty Mona');
+            });
 
             Cart::destroy();
             return redirect()->route('msg')->with('msg', 'Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ giao hàng tới bạn trong thời gian sớm nhất. Mã đơn hàng của bạn là: #'.$order->code);
